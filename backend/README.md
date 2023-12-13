@@ -19,3 +19,12 @@
 
 ## (3) Backend: Mongoose connection create between node js and mongodb
     - npm i mongoose
+
+## (4) Backend: Model and Schem Created
+    - const userSchema = new mongoose.Schema({
+        name: {
+            type: String,
+            require: true
+        }
+    }, {timestamps : true});
+    - const Users = new mongoose.model("user", userSchema);
