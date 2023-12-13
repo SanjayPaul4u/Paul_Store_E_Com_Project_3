@@ -31,3 +31,12 @@
 
 ## (5) Backend: Multer used for uploading photo or image
     - npm i multer
+
+## (6) Backend: RestAPI create - CreateAccount, LogIn, GetUser || FetchUser middle ware create || Validation || Password Hashing
+
+    - npm i express-validator
+    - npm i bcryptjs
+    - npm i doenv
+    - npm i jsonwebtoken
+
+    - please watch the file for better understand.
