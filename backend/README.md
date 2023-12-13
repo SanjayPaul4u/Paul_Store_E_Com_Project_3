@@ -40,3 +40,6 @@
     - npm i jsonwebtoken
 
     - please watch the file for better understand.
+
+## (7) Backend: RestAPI create - Add Product
+    - In "addproduct" RestAPI we define and save two schema one is only "producs" and "singleProduct"

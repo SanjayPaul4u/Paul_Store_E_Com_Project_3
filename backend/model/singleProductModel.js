@@ -14,9 +14,11 @@ const singleProductSchema = new mongoose.Schema({
         require : true
     },
     colors : [Object],
-    weight: [Object],
+    weight: {
+        type : String
+    },
     description: {
-        type : Number,
+        type : String,
         require : true
     },
     category:{
@@ -43,6 +45,6 @@ const singleProductSchema = new mongoose.Schema({
     
 }, {timestamps : true});
 
-const singleProduct = new mongoose.model("sigleproduct", singleProductSchema);
+const SingleProducts = new mongoose.model("sigleproduct", singleProductSchema);
 
-module.exports = singleProduct;
+module.exports = SingleProducts;

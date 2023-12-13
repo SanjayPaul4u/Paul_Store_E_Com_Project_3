@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:false}));
 
 // EXPRESS ROUTER CREATE
 app.use("/api/auth", router);
-app.use("/api/product", ProductRouter );
+app.use("/api/products", ProductRouter );
 app.use("/api", OtherRouter );
 
 
