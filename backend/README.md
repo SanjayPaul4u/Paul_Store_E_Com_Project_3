@@ -28,3 +28,6 @@
         }
     }, {timestamps : true});
     - const Users = new mongoose.model("user", userSchema);
+
+## (5) Backend: Multer used for uploading photo or image
+    - npm i multer
