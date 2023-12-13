@@ -2,6 +2,7 @@ const express = require("express");
 const {router} = require("./routes/authRouter");// auth router
 const ProductRouter = require("./routes/productRouter");
 const OtherRouter = require("./routes/otherRouter");
+require("./db/database");
 
 // MIDLEWARE
 const app = express();
