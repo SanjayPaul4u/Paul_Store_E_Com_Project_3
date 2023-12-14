@@ -1,6 +1,7 @@
 const express = require("express");
 const {router} = require("./routes/authRouter");// auth router
 const ProductRouter = require("./routes/productRouter");
+const CartRouter = require("./routes/cartRouter");
 const OtherRouter = require("./routes/otherRouter");
 require("./db/database");
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({extended:false}));
 // EXPRESS ROUTER CREATE
 app.use("/api/auth", router);
 app.use("/api/products", ProductRouter );
+app.use("/api/cart", CartRouter );
 app.use("/api", OtherRouter );
 
 

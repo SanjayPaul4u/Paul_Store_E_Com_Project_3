@@ -74,3 +74,9 @@
 ## (9) Backend: RestAPI create - 'GET PRODUCT by product ID'
 
 ## (10) Backend: RestAPI create - 'DELETE admin PRODUCT'
+
+## (11) Backend: RestAPI create - 'AddToCart'
+    - carts model & schema create
+    - cart router create
+    - cart controller create
+    - add to cart api create with out validation (BECAUSE user not will be controll this, thats why);

@@ -18,7 +18,7 @@ const fetchUser = async(req, res, next) =>{
     try {
         const verified_token = await jwt.verify(token, jwt_secret_key);
         const user_data = await Users.findOne({_id: verified_token.user.id});
-        console.log(user_data);
+        // console.log(user_data);
 
         req.user = user_data;
         req.token = token;
