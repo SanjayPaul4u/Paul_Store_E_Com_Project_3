@@ -5,10 +5,10 @@ const Products = require('../model/productsModel');
 
 
 
-const addProductFunc = async (req, res)=>{
+const addProductFunc = async (req, res)=>{ // 📌 TODO = Validation
     try {
         let success = false;
-        const {name, company, price, colors, weight, description, category, shipping, stock, reviews, stars, featured }  = req.body;
+        const {name, company, price, colors, weight, description, category, shipping, stock, reviews, stars, featured, search_key_word }  = req.body;
         
         //📌 FILE ARRAY CREATE & PUSH ALL IMAGE FILE FOR IMAGE SCHEMA
         const file_array = [];
@@ -33,11 +33,29 @@ const addProductFunc = async (req, res)=>{
 
         //📌 if ANY IMAGE IS GREATER THEN 1 MB
         if(isGreaterThen1MB ){
+            success = false;
             return res.status(400).json({success, message:"Each Image Will be less then 1 MB"});
         }
 
+        //📌 DEFINE PRODUCTs SCHEMA AND SAVE
+        const all_P_Data = await Products({
+            name,
+            company,
+            price: JSON.parse(price),
+            colors : JSON.parse(colors),
+            weight,    
+            description,
+            category,
+            featured: JSON.parse(featured),
+            search_key_word,
+            image : [file_array[0]]
+        })
+        const Saved_All_P_Data = await all_P_Data.save();
+
+        
         //📌 DEFINE SINGLE PRODUCT SCHEMA AND SAVE
         const single_P_Data = await SingleProducts({
+            product_id: Saved_All_P_Data._id,
             name,
             company,
             price : JSON.parse(price),
@@ -54,29 +72,17 @@ const addProductFunc = async (req, res)=>{
 
         const saved_Single_P_Data = await single_P_Data.save();
 
-        //📌 DEFINE PRODUCTs SCHEMA AND SAVE
-        const all_P_Data = await Products({
-            name,
-            company,
-            price: JSON.parse(price),
-            colors : JSON.parse(colors),
-            weight,    
-            description,
-            category,
-            featured: JSON.parse(featured),
-            image : [file_array[0]]
-        })
-        const Saved_All_P_Data = await all_P_Data.save();
 
 
-        console.log(Saved_All_P_Data);
-        res.send("okay");
+        success = true;
+        res.status(201).json({success, message:"Prodeuct Added Success fully"});
         
     } catch (error) {
         console.log("addProductFunc Error********");
         console.log(error);
     }
 }
+
 
 
 // fileSizeformatter

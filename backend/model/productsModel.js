@@ -29,6 +29,10 @@ const productsSchema = new mongoose.Schema({
         type : Boolean,
         require : true
     },
+    search_key_word:{
+        type : String,
+        require : true
+    },
     image : [Object]
     
 }, {timestamps : true});

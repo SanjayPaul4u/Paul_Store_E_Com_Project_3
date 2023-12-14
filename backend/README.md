@@ -43,3 +43,6 @@
 
 ## (7) Backend: RestAPI create - Add Product
     - In "addproduct" RestAPI we define and save two schema one is only "producs" and "singleProduct"
+    
+## (8) Backend: RestAPI create - 'GET ALL PRODUCT' with 'LIMIT', 'FILTER' and 'SORTING'🔥🔥🔥
+    - it is so power full for any e-commerce application
