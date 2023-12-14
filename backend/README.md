@@ -72,3 +72,5 @@
 
 
 ## (9) Backend: RestAPI create - 'GET PRODUCT by product ID'
+
+## (10) Backend: RestAPI create - 'DELETE admin PRODUCT'

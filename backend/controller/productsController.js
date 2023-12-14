@@ -72,8 +72,6 @@ const addProductFunc = async (req, res)=>{ // 📌 TODO = Validation
 
         const saved_Single_P_Data = await single_P_Data.save();
 
-
-
         success = true;
         res.status(201).json({success, message:"Prodeuct Added Success fully"});
         
@@ -83,6 +81,38 @@ const addProductFunc = async (req, res)=>{ // 📌 TODO = Validation
     }
 }
 
+const deleteAdminProduct = async(req, res) =>{
+    try {
+        let success = false;
+        const id = req.params.id;
+
+        // SIMPLE PRODUCT DATA FIND
+        const pro_data = await Products.findById(id);
+        if(!pro_data){
+            success = false;
+            return res.status(404).json({success, message: "Not found"})
+        }
+
+        // FIND from SINGLE PRODUCT DATA
+        const single_pro_data = await SingleProducts.findOne({product_id: id});
+        if(!single_pro_data){
+            success = false;
+            return res.status(404).json({success, message: "Not found"})
+        }
+
+        const del_simple_data =  await Products.findByIdAndDelete(id, {new: true});
+        const del_single_data =  await SingleProducts.findOneAndDelete({product_id: id}, {new: true});
+
+        // console.log(del_simple_data);
+        // console.log(del_single_data);
+        success = true;
+        res.status(200).json({success, message:"Deleted SuccessFully"})
+    } catch (error) {
+        let success = false;
+        console.log("deleteAdminProduct ERROR*********");
+        res.status(500).json({success, message: error.message})
+    }   
+}
 
 
 // fileSizeformatter
@@ -97,4 +127,4 @@ const fileSizeformatter = (bytes, decimal)=>{
     return parseFloat((bytes/ Math.pow(1000, index)).toFixed(dm)) +' '+sizes[index];
 }
 
-module.exports = {addProductFunc}
+module.exports = {addProductFunc, deleteAdminProduct}
