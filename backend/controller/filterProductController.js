@@ -2,6 +2,7 @@ const SingleProducts = require('../model/singleProductModel');
 const Products = require('../model/productsModel');
 
 
+// GET ALL PRODUCT AND FILTERING 📌
 const getAllProductAndFilter = async (req, res)=>{
     try {
         const {contentSize, page, category, price, company, color, weight, search, sort} = req.query;
@@ -57,7 +58,7 @@ const getAllProductAndFilter = async (req, res)=>{
         }
 
          // Finding the Product with FILTER 📌);
-        let allProductData = await Products.find(filterObj).sort(sortfilterObj).select("-image").limit(contentSize).skip(contentSize*(page-1));
+        let allProductData = await Products.find(filterObj).sort(sortfilterObj).limit(contentSize).skip(contentSize*(page-1));
 
         const totalResult = await Products.countDocuments({});
         
@@ -70,25 +71,27 @@ const getAllProductAndFilter = async (req, res)=>{
     }
 }
 
+// GET PRODUCT by PRODUCT ID📌
+const getProductById = async(req, res) =>{
+    try {
+        let success = false
+        const id = req.params.id;
+        const product_data = await SingleProducts.findOne({product_id:id});
+        if(!product_data){
+            success = false;
+            return res.status(404).json({success, message:"Not Found"});
+        }
+        success = true;
+        res.status(200).json({success, message:"Got Single Product successfully", product_data});
 
-// ?category=
-// cake, ice+creame, bakery, others, all
-
-// &company= 
-// dinamicly find
-
-// &price=
-// 0-500
-// 500-1000
-// 1000-9000
-// 9000-above
-
-// &colors=
-//{ colors : { $all : [' rgb(30 30 200)'] }}
-
-// &weight=
-// 500g, 1kg, 5kg, 15kg, 25kg
+    } catch (error) {
+        success = false
+        console.log("getProductById ERROR********");
+        console.log(error);
+        res.status(500).json({success, error:error.message}) 
+    }
+}
 
 
 
-module.exports = {getAllProductAndFilter}
+module.exports = {getAllProductAndFilter, getProductById}

@@ -1,6 +1,6 @@
 const express = require("express");
 const { addProductFunc} = require("../controller/productsController");
-const { getAllProductAndFilter } = require("../controller/filterProductController");
+const { getAllProductAndFilter, getProductById} = require("../controller/filterProductController");
 const upload = require("../photoUploadHelper/fileHelper");
 
 
@@ -13,6 +13,9 @@ router.post("/addproduct", upload.array("files"), addProductFunc);
 
 // 📌 route 2: get: /api/products/allproduct
 router.get("/allproduct", getAllProductAndFilter);
+
+// 📌 route 3: get: /api/products/allproduct/:id
+router.get("/allproduct/:id", getProductById);
 
 // EXPORT
 module.exports = router;

@@ -45,4 +45,30 @@
     - In "addproduct" RestAPI we define and save two schema one is only "producs" and "singleProduct"
     
 ## (8) Backend: RestAPI create - 'GET ALL PRODUCT' with 'LIMIT', 'FILTER' and 'SORTING'🔥🔥🔥
-    - it is so power full for any e-commerce application
+    - it is so powerfull for any e-commerce 
+    
+#### ?category=
+        cake, ice+creame, bakery, others, all
+
+#### &company= 
+    dinamicly find
+
+#### &price=
+    0-500
+    500-1000
+    1000-9000
+    9000-above
+
+#### &colors=
+    { colors : { $all : [' rgb(30 30 200)'] }}
+
+#### &weight=
+    500g, 1kg, 5kg, 15kg, 25kg
+
+#### &search=
+
+#### &sort=
+    high-low, low-high, a-z, z-a
+
+
+## (9) Backend: RestAPI create - 'GET PRODUCT by product ID'
