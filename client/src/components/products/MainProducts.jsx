@@ -1,13 +1,23 @@
 import React from 'react'
+import styled from 'styled-components'
+import ProductPageHeader from './ProductPageHeader'
+import ProductPageBody from './ProductPageBody'
+
+
 
 const MainProducts = () => {
   return (
-    <div>
-        <h1>Main Products Page</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum et exercitationem temporibus facilis mollitia culpa maiores! Minima quia eum, doloribus cupiditate voluptatibus sint repellendus voluptates? Aspernatur doloremque possimus est esse?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus maxime eaque ut quos atque, itaque illum odio. Ratione animi molestiae eum odio dolorum earum officia fugit consequatur, culpa hic doloremque?</p>
-    </div>
+    <Wrapper className='main-product'>
+        <ProductPageHeader/>
+        <ProductPageBody/>
+    </Wrapper>
   )
 }
 
+const Wrapper = styled.section`
+  min-height: 100vh; 
+  max-height: auto;
+  padding-top: 4rem;
+  
+`
 export default MainProducts

@@ -26,7 +26,7 @@ const Navbar = () => {
                 </li>   
 
                 <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/">
+                <NavLink className="nav-link" aria-current="page" to="/" style={{marginRight: "-0.5rem"}}>
                     <FaRegUserCircle className='iconStyle'/>
                 </NavLink>
                 </li>               
@@ -38,7 +38,6 @@ const Navbar = () => {
 }
 
 const Wrapper = styled.nav`
-    
     background-color: ${({theme})=> theme.colors.black};
 
     .container-fluid .navbar-brand{
@@ -52,11 +51,10 @@ const Wrapper = styled.nav`
     }
     .navbar-nav .nav-item{
         .nav-link{
-            font-family: ${({theme})=> theme.fonts.font1};
             color: ${({theme})=> theme.colors.lowWhite};
-            font-weight: 600;
             text-transform: uppercase;
             font-size: 0.8rem;
+            font-family: ${({theme})=> theme.fonts.font1};
 
             .iconStyle{
                 color: ${({theme})=> theme.colors.white};
@@ -69,6 +67,7 @@ const Wrapper = styled.nav`
         }
         .active{ // nav-item automatic set active 
             background-color: ${({theme})=> theme.colors.lowBlack};
+            color: #fff;
         }
     }
     

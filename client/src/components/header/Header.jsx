@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const Header = () => {
   return (
-    <Wrapper>
+    <Wrapper className='fixed-top'>
         <div  className='container'>
          <Navbar/>
         </div>

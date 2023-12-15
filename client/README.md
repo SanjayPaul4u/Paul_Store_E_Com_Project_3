@@ -44,6 +44,8 @@
 ## (6)FRONTEND: Header - Navbar Component create
     - npm i react-icons
     - use react -icons
+
+## (7)FRONTEND: Product Page 'Header' Component Done
     
 
 
