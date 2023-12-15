@@ -11,4 +11,12 @@
     - adding bootstrap
     - set title & content
     - add fav icon
+
+## (3)FRONTEND: React router set up
+    - npm i react-router-dom
+    - <BrowserRouter>
+    - <Routes>
+        <Route exact path="/home" element={<Home/>}/>
+      </Routes>
+     </BrowserRouter>
     

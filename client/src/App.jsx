@@ -1,11 +1,15 @@
 import React from 'react'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Del from './components/del'
+
 
 const App = () => {
   return (
-    <>
-      <div>App</div>
-      <div className="btn btn-danger">click here</div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/del" element={<Del/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
