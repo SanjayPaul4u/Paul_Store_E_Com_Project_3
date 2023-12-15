@@ -19,4 +19,13 @@
         <Route exact path="/home" element={<Home/>}/>
       </Routes>
      </BrowserRouter>
+
+## (4)FRONTEND: Styled Component Add
+    - npm i styled-components
+
+    - GlobalStyle Added
+    - ThemeProvider added
+    - Custom Button Style component create
+
+
     
