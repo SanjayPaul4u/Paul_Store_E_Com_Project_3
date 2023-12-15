@@ -27,7 +27,7 @@
     - ThemeProvider added
     - Custom Button Style component create
 
-## (4)FRONTEND: Redux Tool Kit Setup
+## (5)FRONTEND: Redux Tool Kit Setup
     - npm i @reduxjs/toolkit
     - npm i react-redux
 
@@ -36,10 +36,16 @@
 
     -- store configure
             import {configureStore} from '@reduxjs/toolkit'
-            
+
     -- Connect react with redux toolkit
             import { Provider } from 'react-redux'
             import store from './store/index.jsx'
+
+## (6)FRONTEND: Header - Navbar Component create
+    - npm i react-icons
+    - use react -icons
+    
+
 
 
     
