@@ -1,5 +1,5 @@
 import React from 'react'
-import Img1 from '/img2.png'
+import Img1 from '/img4.png'
 import { FaStar } from "react-icons/fa6";
 import PriceFormat from '../../helper/PriceFormat'
 import { NavLink } from 'react-router-dom';

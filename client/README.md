@@ -48,6 +48,11 @@
 ## (7)FRONTEND: Product Page 'Header' Component Done
 
 ## (8)FRONTEND: Product Page 'Grid View' Component Done
+
+## (9)FRONTEND: Product Page 'List View' Component Done
+
+## (10)FRONTEND: Product Page 'Filter' Component Done
+    - product page almost done
     
 
 

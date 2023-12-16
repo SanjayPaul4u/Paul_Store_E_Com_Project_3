@@ -1,5 +1,5 @@
 import React from 'react'
-import Img1 from '/img2.png'
+import Img1 from '/img1.png'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import PriceFormat from '../../helper/PriceFormat'
@@ -22,10 +22,10 @@ const ListView = () => {
           {/* badge end*/}
 
           <div className="row g-0">
-            <div className="col-md-4">
+            <div className="col-md-3">
               <img src={Img1} className="img-fluid rounded-start" alt="list-product-img-err"/>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-9">
               <div className="card-body">            
                       <div>
                           <h5>Sccharin</h5>
