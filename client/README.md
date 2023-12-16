@@ -53,6 +53,9 @@
 
 ## (10)FRONTEND: Product Page 'Filter' Component Done
     - product page almost done
+
+## (11)FRONTEND: Working on 'SingleProduct' Component
+    - Single image styling done
     
 
 

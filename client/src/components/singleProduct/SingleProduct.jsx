@@ -1,13 +1,62 @@
 import React from 'react'
+import styled from 'styled-components'
+import {useParams} from 'react-router-dom'
+import SingleImage from './SingleImage'
+import SingleData from './SingleData'
+
+
 
 const SingleProduct = () => {
+  const {id}  = useParams();
   return (
-    <>
-        <div>SingleProduct</div>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam repellat totam iure, molestias ad accusantium aspernatur perspiciatis velit voluptate soluta eaque. Libero voluptatum obcaecati temporibus numquam ad reiciendis aperiam dolores, doloremque at quo deleniti id error maiores necessitatibus odit? Ea maxime in, veritatis amet quas a commodi hic! Quo temporibus quos sit ex quam itaque earum necessitatibus laboriosam odit fuga numquam consequatur dolore amet officia distinctio ipsam nesciunt, eum, molestiae quidem beatae? Voluptates odio eligendi asperiores dolor quos cupiditate ducimus neque. Eius, illum fuga corrupti porro cupiditate voluptatum aspernatur corporis voluptatibus delectus, numquam voluptatem pariatur unde, quisquam libero fugiat laborum?</p>
-        <h1>Single Product</h1>
-    </>
+    <Wrapper>
+      <div className="header">
+        <div className='container header-div'>
+          <h6>Product Id: <strong>{id}</strong></h6>          
+        </div>
+      </div>
+
+      <div className='single-main-product'>
+        <div className="row single-product-body">
+          <div className="img-row col-6 col-md-6 col-xl-6">
+            <SingleImage/>
+          </div>
+          <div className="data-row col-6 col-md-6 col-xl-6">
+            <SingleData/>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
   )
 }
 
+const Wrapper = styled.section`
+    height: 100vh;
+    padding-top: 4rem;
+    .header{
+      color: ${({theme})=> theme.colors.lowBlack};
+      .header-div{
+        padding: 1.5rem;
+        strong{
+          color: ${({theme})=> theme.colors.mediumBlack};
+        }
+      }
+    }
+
+    .single-main-product{
+      background-color: ${({theme})=> theme.colors.mainBg};
+      height: 100%;
+      padding: 1.5rem;
+      
+      .single-product-body{
+        .img-row{
+          /* padding: 0; */
+          display: flex;
+          justify-content: end;
+        }
+        .data-row{
+        }
+      }
+    }
+`
 export default SingleProduct
