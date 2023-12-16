@@ -9,7 +9,7 @@ const FilterRow = () => {
   )
 }
 const Wrapper = styled.div`
-  background-color: ${({theme})=> theme.colors.mainBg};
+  /* background-color: ${({theme})=> theme.colors.mainBg}; */
   height: 100vh;
 `
 export default FilterRow

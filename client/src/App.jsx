@@ -5,12 +5,15 @@ import { ThemeProvider } from 'styled-components'
 import Header from './components/header/Header'
 import Home from './components/home/Home'
 import MainProducts from './components/products/MainProducts'
+import SingleProduct from './components/singleProduct/SingleProduct'
+
 
 
 const App = () => {
   const theme = {
     colors:{
       black: "#1f2324",
+      mediumBlack: "#444444",
       lowBlack: "#65676b",
       red: "#f05c5c",
       lowRed: "#f47e7d",
@@ -22,7 +25,8 @@ const App = () => {
     },
     fonts: {
       brandFont: "'Gluten', cursive",
-      font1: "'Kanit', sans-serif"
+      font1: "'Kanit', sans-serif",
+      font2: "'Poppins', sans-serif"
     }
   }
   return (
@@ -34,6 +38,7 @@ const App = () => {
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/home" element={<Home/>}/>
           <Route exact path="/products" element={<MainProducts/>}/>
+          <Route exact path="/products/:id" element={<SingleProduct/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -46,6 +46,8 @@
     - use react -icons
 
 ## (7)FRONTEND: Product Page 'Header' Component Done
+
+## (8)FRONTEND: Product Page 'Grid View' Component Done
     
 
 
