@@ -35,24 +35,6 @@ const GridView = () => {
           <div className="row-products col-10 col-md-4 col-xl-4">
             <OurProduct/>
           </div>
-          <div className="row-products col-10 col-md-4 col-xl-4">
-            <OurProduct/>
-          </div>
-          <div className="row-products col-10 col-md-4 col-xl-4">
-            <OurProduct/>
-          </div>
-          <div className="row-products col-10 col-md-4 col-xl-4">
-            <OurProduct/>
-          </div>
-          <div className="row-products col-10 col-md-4 col-xl-4">
-            <OurProduct/>
-          </div>
-          <div className="row-products col-10 col-md-4 col-xl-4">
-            <OurProduct/>
-          </div>
-          <div className="row-products col-10 col-md-4 col-xl-4">
-            <OurProduct/>
-          </div>
     </Wrapper>
   )
 }

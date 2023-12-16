@@ -1,5 +1,5 @@
 import React from 'react'
-import Img1 from '/img3.png'
+import Img1 from '/img2.png'
 import { FaStar } from "react-icons/fa6";
 import PriceFormat from '../../helper/PriceFormat'
 import { NavLink } from 'react-router-dom';
@@ -12,7 +12,7 @@ const OurProduct = () => {
     <div className="card position-relative" style={{width: "auto"}}>
             {/* badge */}
             <div className='badge-div position-absolute'>
-                <span class=" badge">
+                <span className=" badge">
                     IceCreame bakery
                 </span>          
             </div>            
