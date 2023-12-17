@@ -56,6 +56,8 @@
 
 ## (11)FRONTEND: Working on 'SingleProduct' Component
     - Single image styling done
+
+## (12)FRONTEND:  'SingleProduct' Component styling done
     
 
 

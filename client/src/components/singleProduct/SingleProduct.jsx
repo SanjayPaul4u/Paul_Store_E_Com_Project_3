@@ -17,6 +17,7 @@ const SingleProduct = () => {
       </div>
 
       <div className='single-main-product'>
+        <div className='container'>       
         <div className="row single-product-body">
           <div className="img-row col-6 col-md-6 col-xl-6">
             <SingleImage/>
@@ -24,6 +25,7 @@ const SingleProduct = () => {
           <div className="data-row col-6 col-md-6 col-xl-6">
             <SingleData/>
           </div>
+        </div>
         </div>
       </div>
     </Wrapper>
@@ -45,9 +47,11 @@ const Wrapper = styled.section`
 
     .single-main-product{
       background-color: ${({theme})=> theme.colors.mainBg};
-      height: 100%;
+      /* height: 100%; */
       padding: 1.5rem;
-      
+      .container{
+        padding: 0 1.5rem;
+      }
       .single-product-body{
         .img-row{
           /* padding: 0; */

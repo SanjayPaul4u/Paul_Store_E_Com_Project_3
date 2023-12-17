@@ -46,7 +46,7 @@ const Wrapper = styled.div`
             padding: 0.4rem;
             .badge{
                 padding: 0.5rem 1rem;
-                background-color: ${({theme})=>theme.colors.red};
+                background-color: ${({theme})=>theme.colors.green};
                 font-size: 1rem;
             }
         }
