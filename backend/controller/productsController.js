@@ -18,7 +18,7 @@ const addProductFunc = async (req, res)=>{ // 📌 TODO = Validation
             const imageBase64 = fs.readFileSync(element.path);
             const finalImageBase64 = imageBase64.toString("base64");
 
-            if(element.size > 1000000){ // 1000000 bytes = 1 mb
+            if(element.size > 1010000){ // 1000000 bytes = 1 mb
                 isGreaterThen1MB = true;
             }
             const file = {
@@ -48,6 +48,7 @@ const addProductFunc = async (req, res)=>{ // 📌 TODO = Validation
             category,
             featured: JSON.parse(featured),
             search_key_word,
+            stars: JSON.parse(stars),
             image : [file_array[0]]
         })
         const Saved_All_P_Data = await all_P_Data.save();

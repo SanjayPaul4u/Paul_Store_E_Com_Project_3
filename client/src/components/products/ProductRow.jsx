@@ -3,13 +3,20 @@ import GridView from './GridView'
 import styled from 'styled-components'
 import ListView from './ListView'
 
+import { useSelector } from 'react-redux'
 
 
 const ProductRow = () => {
+  const data = useSelector((state)=>{
+    return state.importants;
+  });
+  // console.log(data);
   return (
     <Wrapper className="product-row-2 col-10 col-md-9 col-xl-9">
-      {/* <GridView/> */}
-      <ListView/>
+      {
+        data.gridView? <GridView/>:<ListView/>
+      }
+      
     </Wrapper>
   )
 }

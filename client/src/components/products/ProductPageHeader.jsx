@@ -5,8 +5,29 @@ import { TfiViewListAlt } from "react-icons/tfi";
 import { FaThList } from "react-icons/fa";//<FaThList />
 import styled from 'styled-components';
 
+import {useDispatch, useSelector} from 'react-redux'
+import { girdViewFunc, listViewFunc } from '../../store/slices/importantSlice'
+
+
+
 
 const ProductPageHeader = () => {
+    // using dispatch
+    const dispatch = useDispatch();
+
+    // using selector
+    const data = useSelector((state)=>{
+        return state.importants;
+      });
+
+    // set grid func
+    const setGridFunc = ()=>{
+        dispatch(girdViewFunc());
+    }
+    // set list func
+    const setListFunc = ()=>{
+        dispatch(listViewFunc());
+    }
   return (
       <Wrapper>
         <div className="product-header-content container">
@@ -32,13 +53,28 @@ const ProductPageHeader = () => {
                         <option value="z-a">Name: z-a</option>
                     </select>
                 </div>
-                <div className="grid-btn-div mx-4">
+
+                <div 
+                className="grid-btn-div mx-4"
+                onClick={setGridFunc}
+                >
+                    {
+                    data.gridView?
+                    <h5><IoGrid /></h5>:                   
                     <h5><IoGridOutline /></h5>
+                    }
                     <p>Grid</p>
                 </div>
 
-                <div className="list-btn-div">
-                    <h5><TfiViewListAlt /></h5>
+                <div 
+                className="list-btn-div"
+                onClick={setListFunc}
+                >   {
+                    data.gridView?
+                    <h5><TfiViewListAlt /></h5>:
+                    <h5><FaThList /></h5>
+                    }
+                    
                     <p>List</p>
                 </div>
 
@@ -85,10 +121,12 @@ const Wrapper = styled.section`
                font-size: 0.8rem;
                font-weight: 500;
                margin-bottom: 0rem;
+               cursor: pointer;
             }
             h5{
                 text-align: center;
                 margin-bottom: 0rem;
+                cursor: pointer;
             }
         }
     }

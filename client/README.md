@@ -59,6 +59,10 @@
 
 ## (12)FRONTEND:  'SingleProduct' Component styling done
     
+## (13)FRONTEND:  'API CALL - Fetch all products' and 'Grid & List' View Functionality
+    - npm i axios
+    - we have used "REDUX TOOL KIT" 
+    - see the all file for better understand
 
 
 

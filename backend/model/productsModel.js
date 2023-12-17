@@ -33,6 +33,10 @@ const productsSchema = new mongoose.Schema({
         type : String,
         require : true
     },
+    stars:{
+        type: Number,
+        require: true 
+    },
     image : [Object]
     
 }, {timestamps : true});

@@ -4,6 +4,7 @@ const ProductRouter = require("./routes/productRouter");
 const CartRouter = require("./routes/cartRouter");
 const OtherRouter = require("./routes/otherRouter");
 require("./db/database");
+const cors = require("cors");
 
 
 const app = express();
@@ -14,6 +15,7 @@ const port = process.env.PORT || 7000;
 const host = "127.0.0.1";
 
 // midleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
