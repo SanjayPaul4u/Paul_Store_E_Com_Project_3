@@ -2,14 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-
 const host = "http://localhost:7000";
 let filter = '';
 
 // USE CREATE ASYNC THUNK & fetchProducts CREATE
 export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, contentSize, search})=>{
     try {
-            search && search.length!=0? filter = `&search=${search}`:filter = filter;
+            // search? filter = filter+`&search=${search}`:filter = filter;
+            filter = `&search=${search}`
+            console.log(filter);
             
         const response = await axios({
             method: "get",

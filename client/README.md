@@ -70,5 +70,15 @@
 ## (15)FRONTEND:  SEARCH filter done 🔥
 
 
+## (16)FRONTEND:  FILTERING with Query 🔥 (Very Important part)
+    - import {useSearchParams} from 'react-router-dom';
+    - const [query, setQuery] = useSearchParams();
+
+
+    - const copy = new URLSearchParams(query);
+    - copy.set("search", searchVal);
+    - setQuery(copy);
+
+    - query("search");
 
     

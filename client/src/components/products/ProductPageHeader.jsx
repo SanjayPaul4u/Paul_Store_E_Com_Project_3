@@ -7,22 +7,25 @@ import styled from 'styled-components';
 
 import {useDispatch, useSelector} from 'react-redux'
 import { girdViewFunc, listViewFunc } from '../../store/slices/importantSlice'
-import { searchFunc } from '../../store/slices/ProductSlice';
-
-
-
+import { NavLink, useSearchParams} from 'react-router-dom';
 
 
 const ProductPageHeader = () => {
     const [searchVal, setSearchVal] = useState("");
+    const [query, setQuery] = useSearchParams();
 
     // using dispatch
     const dispatch = useDispatch();
 
     // using selector
-    const data = useSelector((state)=>{
+    const main_important_data = useSelector((state)=>{
         return state.importants;
       });
+    // using selector
+    const main_products_data = useSelector((state)=>{
+        return state.products;
+      });
+    const {totalResult} = main_products_data;
 
     // set grid func
     const setGridFunc = ()=>{
@@ -37,24 +40,28 @@ const ProductPageHeader = () => {
     const onChangeFunc = (e) =>{
         setSearchVal(e.target.value);
     }
-   
+
+    const onClickSearchFunc = (event) =>{
+        event.preventDefault();
+        const copy = new URLSearchParams(query);
+        copy.set("search", searchVal);
+        setQuery(copy);
+    }
   return (
       <Wrapper>
         <div className="product-header-content container">
             <div className='first-row'>
                 {/* TOTAL PRODUCT */}
                 <div className="product-count-div">
-                    <h6>45 Products Available</h6>
+                    <h6>{totalResult} Products Available</h6>
                 </div>
 
                 {/* SEARCH */}
                 <form className="d-flex mx-4">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchVal} onChange={onChangeFunc}/>
+
                     <button className="btn btn-outline" type="submit" 
-                    onClick={(e)=>{
-                        e.preventDefault();
-                        dispatch(searchFunc(searchVal)
-                        )}}
+                    onClick={onClickSearchFunc}
                     >Search</button>
                 </form>
             </div>
@@ -76,7 +83,7 @@ const ProductPageHeader = () => {
                 onClick={setGridFunc}
                 >
                     {
-                    data.gridView?
+                    main_important_data.gridView?
                     <h5><IoGrid /></h5>:                   
                     <h5><IoGridOutline /></h5>
                     }
@@ -87,7 +94,7 @@ const ProductPageHeader = () => {
                 className="list-btn-div"
                 onClick={setListFunc}
                 >   {
-                    data.gridView?
+                    main_important_data.gridView?
                     <h5><TfiViewListAlt /></h5>:
                     <h5><FaThList /></h5>
                     }

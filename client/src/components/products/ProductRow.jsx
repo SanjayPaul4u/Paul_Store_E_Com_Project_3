@@ -6,11 +6,19 @@ import {
   fetchProducts
 } from "../../store/async-thunk-helper/asyncThunkHelper";
 import { useSelector, useDispatch } from 'react-redux'
+import { useSearchParams } from 'react-router-dom';
+
 
 
 
 
 const ProductRow = () => {
+  const [query, setQuery] = useSearchParams();
+  let search = query.get("search");
+  if(!search){
+    search = ""
+  }
+
   // USING DISPATCH
   const dispatch = useDispatch();
 
@@ -23,14 +31,13 @@ const ProductRow = () => {
   const main_products_data = useSelector((state) => {
     return state.products;
   });
-  const { productsData, contentSize, page, search } = main_products_data;
+  const { productsData, contentSize, page} = main_products_data;
 
   // using UseEffect 📌
   useEffect(() => {
-    // if (productsData.length === 0) {
       dispatch(fetchProducts({search, contentSize, page}));
-    // }
-  }, [main_products_data.search]);
+
+  }, [main_products_data.search, query]);
 
   console.log(main_products_data);
   return (

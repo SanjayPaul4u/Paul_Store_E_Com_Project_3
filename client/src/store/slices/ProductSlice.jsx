@@ -10,16 +10,10 @@ const productSlice = createSlice({
         isError: false,
         totalResult:0,
         contentSize: 2,
-        page: 1,
-        search: ""
+        page: 1
     },
-    reducers :{
-        searchFunc(state, action){
-            const word = action.payload.replace(/\s/g, "+");
-            state.search = word;
-            state.page = 1;
-        }
-    },
+    // reducers :{
+    // },
 
     extraReducers : (builder)=>{
         builder.addCase(fetchProducts.pending, (state, action)=>{
@@ -29,7 +23,8 @@ const productSlice = createSlice({
             // const {isLoading, productsData, totalResult} = state;
             state.isLoading = false;
             state.productsData = action.payload.allProductData;
-            state.totalResult = action.payload.totalResult
+            state.totalResult = action.payload.totalResult;
+            state.page = 1;
         })
         builder.addCase(fetchProducts.rejected, (state, action)=>{
             state.isError = true;
@@ -50,4 +45,3 @@ const productSlice = createSlice({
 
 // console.log(userSlice.actions);
 export default productSlice.reducer;
-export const {searchFunc} = productSlice.actions;
