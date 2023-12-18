@@ -64,7 +64,7 @@ const FilterRow = () => {
         </div>
       </div>
 
-      {/* WEIGHT FILTER */}
+      {/* COLORS FILTER */}
       <div className="color-filter mt-4">
         <h6>COLORS:</h6>
         <div>

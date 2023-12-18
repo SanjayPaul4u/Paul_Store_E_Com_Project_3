@@ -4,14 +4,16 @@ import axios from 'axios'
 
 
 const host = "http://localhost:7000";
+let filter = '';
 
 // USE CREATE ASYNC THUNK & fetchProducts CREATE
-export const fetchProducts = createAsyncThunk("fetchProducts", async ({contentSize, page})=>{
+export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, contentSize, search})=>{
     try {
-        
+            search && search.length!=0? filter = `&search=${search}`:filter = filter;
+            
         const response = await axios({
             method: "get",
-            url: `${host}/api/products/allproduct?contentSize=${contentSize}&page=1`,
+            url: `${host}/api/products/allproduct?contentSize=${contentSize}&page=1${filter}`,
             headers: {
                 "Content-Type": "application/json" //important
             }
@@ -27,7 +29,7 @@ export const fetchMoreProducts = createAsyncThunk("fetchMoreProducts", async ({c
     try {
         const response = await axios({
             method: "get",
-            url:`${host}/api/products/allproduct?contentSize=${contentSize}&page=${page+1}`,
+            url:`${host}/api/products/allproduct?contentSize=${contentSize}&page=${page+1}${filter}`,
             headers: {
                 "Content-Type": "application/json" //important
             }

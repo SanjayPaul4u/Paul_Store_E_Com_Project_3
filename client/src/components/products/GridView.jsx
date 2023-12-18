@@ -1,37 +1,23 @@
 import React, { useEffect } from "react";
 import OurProduct from "./OurProduct";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import {
-  fetchProducts,
   fetchMoreProducts,
 } from "../../store/async-thunk-helper/asyncThunkHelper";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const GridView = () => {
+const GridView = ({main_products_data}) => {
+  const { productsData, isLoading, totalResult, contentSize, page } = main_products_data;
+
   // using dispatch 📌
   const dispatch = useDispatch();
-
-  // get data by useSelector 📌
-  const data = useSelector((state) => {
-    return state.products;
-  });
-  const { productsData, isLoading, totalResult, contentSize, page } = data;
-
-  // using UseEffect 📌
-  useEffect(() => {
-    if (data.productsData.length === 0) {
-      dispatch(fetchProducts({contentSize, page}));
-    }
-  }, []);
 
   // fetch More Function 📌
   const fetchMoreFunc = () => {
     dispatch(fetchMoreProducts({contentSize, page}));
   };
 
-
-  console.log(contentSize);
   return (
     <>
       <Wrapper className="gird-view">

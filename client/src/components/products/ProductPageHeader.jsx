@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoGridOutline } from "react-icons/io5";
 import { IoGrid } from "react-icons/io5";//<IoGrid /> 
 import { TfiViewListAlt } from "react-icons/tfi";
@@ -7,11 +7,15 @@ import styled from 'styled-components';
 
 import {useDispatch, useSelector} from 'react-redux'
 import { girdViewFunc, listViewFunc } from '../../store/slices/importantSlice'
+import { searchFunc } from '../../store/slices/ProductSlice';
+
 
 
 
 
 const ProductPageHeader = () => {
+    const [searchVal, setSearchVal] = useState("");
+
     // using dispatch
     const dispatch = useDispatch();
 
@@ -28,17 +32,30 @@ const ProductPageHeader = () => {
     const setListFunc = ()=>{
         dispatch(listViewFunc());
     }
+
+    // ONCHANGE FUNC 📌
+    const onChangeFunc = (e) =>{
+        setSearchVal(e.target.value);
+    }
+   
   return (
       <Wrapper>
         <div className="product-header-content container">
             <div className='first-row'>
+                {/* TOTAL PRODUCT */}
                 <div className="product-count-div">
                     <h6>45 Products Available</h6>
                 </div>
 
+                {/* SEARCH */}
                 <form className="d-flex mx-4">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-outline" type="submit">Search</button>
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchVal} onChange={onChangeFunc}/>
+                    <button className="btn btn-outline" type="submit" 
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        dispatch(searchFunc(searchVal)
+                        )}}
+                    >Search</button>
                 </form>
             </div>
             

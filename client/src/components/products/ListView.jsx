@@ -3,20 +3,42 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import PriceFormat from "../../helper/PriceFormat";
 import { FaStar } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { fetchMoreProducts } from "../../store/async-thunk-helper/asyncThunkHelper";
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { useDispatch } from "react-redux";
 
-const ListView = () => {
 
-  // get data by useSelector
-  const data = useSelector((state) => {
-    return state.products;
-  });
+const ListView = ({main_products_data}) => {
+const {isLoading, productsData, totalResult, contentSize, page} = main_products_data;
+
+// using useDispatch
+const dispatch = useDispatch();
+
+// fetch More Function 📌
+const fetchMoreFunc = () => {
+  dispatch(fetchMoreProducts({contentSize, page}));
+};
+
 
   return (
-    <Wrapper className="row gird-view">
-      {data.isLoading && <h4>...Loading</h4>}
-      {data.productsData &&
-        data.productsData.map((element) => {
+    <Wrapper className="gird-view">
+      {isLoading && <h4>...Loading</h4>}
+
+      {/* INFINITE SCROLLIN 📌 */}
+      <InfiniteScroll
+          dataLength={productsData.length}
+          next={fetchMoreFunc}
+          hasMore={
+            productsData.length !== totalResult &&
+            productsData.length < totalResult
+          }
+          loader={<h3>...Loadinga</h3>}
+          className="row"
+        >
+
+      {/* MAPPING📌 */}
+      {productsData &&
+        productsData.map((element) => {
           const {_id, name, image, category, description, stars} = element;
           return (
             <div key={_id} className="row-products col-12 col-md-12 col-xl-12">
@@ -67,6 +89,7 @@ const ListView = () => {
             </div>
           );
         })}
+      </InfiniteScroll>
     </Wrapper>
   );
 };
