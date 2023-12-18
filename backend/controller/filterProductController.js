@@ -59,10 +59,9 @@ const getAllProductAndFilter = async (req, res)=>{
 
          // Finding the Product with FILTER 📌);
         let allProductData = await Products.find(filterObj).sort(sortfilterObj).limit(contentSize).skip(contentSize*(page-1));
+        let totalResult = await Products.find(filterObj).count();
 
-        const totalResult = await Products.countDocuments({});
-        
-
+    
         success = true;
         res.status(200).json({success, message:"All Product Goted", totalResult, allProductData});
     } catch (error) {
