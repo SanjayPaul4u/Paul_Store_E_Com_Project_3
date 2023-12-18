@@ -64,6 +64,8 @@
     - we have used "REDUX TOOL KIT" 
     - see the all file for better understand
 
+## (14)FRONTEND:  Infinite Scralling create
+    - npm i react-infinite-scroll-component
 
 
     

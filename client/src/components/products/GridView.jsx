@@ -1,45 +1,68 @@
 import React, { useEffect } from "react";
 import OurProduct from "./OurProduct";
 import styled from "styled-components";
-
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../store/async-thunk-helper/asyncThunkHelper";
+import {
+  fetchProducts,
+  fetchMoreProducts,
+} from "../../store/async-thunk-helper/asyncThunkHelper";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const GridView = () => {
-  // using dispatch
+  // using dispatch 📌
   const dispatch = useDispatch();
 
-  // get data by useSelector
+  // get data by useSelector 📌
   const data = useSelector((state) => {
     return state.products;
   });
-  //
-  const myUrl = data.url;
+  const { productsData, isLoading, totalResult, contentSize, page } = data;
 
-  // using UseEffect
+  // using UseEffect 📌
   useEffect(() => {
-    if(data.productsData.length === 0){
-      dispatch(fetchProducts({ myUrl }));
+    if (data.productsData.length === 0) {
+      dispatch(fetchProducts({contentSize, page}));
     }
   }, []);
 
-  // console.log(data);
-  return (
-    <Wrapper className="row gird-view">
-      {data.isLoading && <h4> ...Loading </h4>}
+  // fetch More Function 📌
+  const fetchMoreFunc = () => {
+    dispatch(fetchMoreProducts({contentSize, page}));
+  };
 
-      {data.productsData &&
-        data.productsData.map((element) => {
-          return (
-            <div
-              key={element._id}
-              className="row-products col-6 col-md-4 col-xl-4"
-            >
-              <OurProduct ProductData = {element} />
-            </div>
-          );
-        })}
-    </Wrapper>
+
+  console.log(contentSize);
+  return (
+    <>
+      <Wrapper className="gird-view">
+        {isLoading && <h4> ...Loading </h4>}
+
+        {/* INFINITE SCROLLIN 📌 */}
+        <InfiniteScroll
+          dataLength={productsData.length}
+          next={fetchMoreFunc}
+          hasMore={
+            productsData.length !== totalResult &&
+            productsData.length < totalResult
+          }
+          loader={<h3>...Loadinga</h3>}
+          className="row"
+        >
+          {/* MAPPING ALL PRODUCT 📌 */}
+          {productsData &&
+            productsData.map((element) => {
+              return (
+                <div
+                  key={element._id}
+                  className="row-products col-6 col-md-4 col-xl-4"
+                >
+                  <OurProduct ProductData={element} />
+                </div>
+              );
+            })}
+        </InfiniteScroll>
+      </Wrapper>
+    </>
   );
 };
 
@@ -48,7 +71,7 @@ const Wrapper = styled.div`
   padding-top: 0.5rem;
   .row-products {
     padding: 1.5rem;
-    &:hover{
+    &:hover {
       padding: 0rem;
       transition: 0.5s;
     }
