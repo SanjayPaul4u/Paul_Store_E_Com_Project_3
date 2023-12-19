@@ -15,11 +15,15 @@ import { useSearchParams } from 'react-router-dom';
 const ProductRow = () => {
   const [query, setQuery] = useSearchParams();
   let search = query.get("search");
+  let sort = query.get("sort");
   if(!search){
     search = ""
   }
+  if(!sort){
+    sort = ""
+  }
 
-  // USING DISPATCH
+  // USING DISPATCH 📌
   const dispatch = useDispatch();
 
   // GOT IMPORTANT DATA by useSelector
@@ -35,11 +39,11 @@ const ProductRow = () => {
 
   // using UseEffect 📌
   useEffect(() => {
-      dispatch(fetchProducts({search, contentSize, page}));
+      dispatch(fetchProducts({search, contentSize, page, sort}));
 
   }, [main_products_data.search, query]);
+  // console.log(main_products_data);
 
-  console.log(main_products_data);
   return (
     <Wrapper className="product-row-2 col-10 col-md-9 col-xl-9">
       {

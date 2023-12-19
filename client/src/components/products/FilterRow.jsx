@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import PriceFormat from "../../helper/PriceFormat";
 import { Button } from "../../styles/Button";
+import { useSelector } from "react-redux";
+
 
 
 const FilterRow = () => {
+  
+
   return (
     <Wrapper className="filter-row-1 col-10 col-md-3 col-xl-3">
       {/* CATEGORY FILTER */}

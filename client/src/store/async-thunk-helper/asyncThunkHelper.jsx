@@ -6,11 +6,12 @@ const host = "http://localhost:7000";
 let filter = '';
 
 // USE CREATE ASYNC THUNK & fetchProducts CREATE
-export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, contentSize, search})=>{
+export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, contentSize, search, sort})=>{
     try {
             // search? filter = filter+`&search=${search}`:filter = filter;
-            filter = `&search=${search}`
-            console.log(filter);
+            filter = `${search && `&search=${search}`}${sort && `&sort=${sort}`}`
+            console.log("search");
+            // console.log(search);
             
         const response = await axios({
             method: "get",

@@ -7,12 +7,13 @@ import styled from 'styled-components';
 
 import {useDispatch, useSelector} from 'react-redux'
 import { girdViewFunc, listViewFunc } from '../../store/slices/importantSlice'
-import { NavLink, useSearchParams} from 'react-router-dom';
+import { useSearchParams} from 'react-router-dom';
 
 
 const ProductPageHeader = () => {
     const [searchVal, setSearchVal] = useState("");
     const [query, setQuery] = useSearchParams();
+    const copy = new URLSearchParams(query);
 
     // using dispatch
     const dispatch = useDispatch();
@@ -41,10 +42,15 @@ const ProductPageHeader = () => {
         setSearchVal(e.target.value);
     }
 
+    // SEARCH FUNCTION 📌
     const onClickSearchFunc = (event) =>{
         event.preventDefault();
-        const copy = new URLSearchParams(query);
         copy.set("search", searchVal);
+        setQuery(copy);
+    }
+    // SORT FUNCTION 📌
+    const onClickSortFunc = (e) =>{
+        copy.set("sort", e.target.value);
         setQuery(copy);
     }
   return (
@@ -69,10 +75,13 @@ const ProductPageHeader = () => {
 
             <div className='second-row'>
                 <div className="sorting-div">
-                    <select className="form-select" aria-label="Default select example">
-                        <option>Sort</option>
-                        <option value="high-low">Price: High-Low</option>
+                    <select 
+                    className="form-select" aria-label="Default select example"
+                    onChange={onClickSortFunc}
+                    >
+                        <option value="">Sort</option>
                         <option value="low-high">Price: Low-High</option>
+                        <option value="high-low">Price: High-Low</option>
                         <option value="a-z">Name: a-z</option>
                         <option value="z-a">Name: z-a</option>
                     </select>

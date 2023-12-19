@@ -39,7 +39,7 @@ const fetchMoreFunc = () => {
       {/* MAPPING📌 */}
       {productsData &&
         productsData.map((element) => {
-          const {_id, name, image, category, description, stars} = element;
+          const {_id, name, image, category, description, stars, price} = element;
           return (
             <div key={_id} className="row-products col-12 col-md-12 col-xl-12">
               {/* cart-start */}
@@ -75,7 +75,7 @@ const fetchMoreFunc = () => {
                           Id:<span> {_id}</span>
                         </p>
                         <h5 className="card-title price">
-                          <PriceFormat price={999 * 100} />
+                          <PriceFormat price={price * 100} />
                         </h5>
                       </div>
                       <p className="rate-para">
