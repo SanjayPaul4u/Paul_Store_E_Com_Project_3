@@ -82,6 +82,8 @@
     - query("search");
 
 ## (17)FRONTEND:  SORT Filter done
+
+## (18)FRONTEND:  Category Wise Filter done
     
 
     

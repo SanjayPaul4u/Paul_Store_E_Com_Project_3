@@ -16,11 +16,16 @@ const ProductRow = () => {
   const [query, setQuery] = useSearchParams();
   let search = query.get("search");
   let sort = query.get("sort");
+  let category = query.get("category");
+
   if(!search){
     search = ""
   }
   if(!sort){
     sort = ""
+  }
+  if(!category || category==="all"){
+    category = ""
   }
 
   // USING DISPATCH 📌
@@ -39,7 +44,7 @@ const ProductRow = () => {
 
   // using UseEffect 📌
   useEffect(() => {
-      dispatch(fetchProducts({search, contentSize, page, sort}));
+      dispatch(fetchProducts({search, contentSize, page, sort, category}));
 
   }, [main_products_data.search, query]);
   // console.log(main_products_data);

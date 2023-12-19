@@ -2,23 +2,31 @@ import React from "react";
 import styled from "styled-components";
 import PriceFormat from "../../helper/PriceFormat";
 import { Button } from "../../styles/Button";
-import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+
 
 
 
 const FilterRow = () => {
+  const [query, setQuery] = useSearchParams();
+  const copy  = new URLSearchParams(query);
+  const category = query.get("category");
   
-
+  const onClickCategory = (e) =>{
+    copy.set("category", e.target.value);
+    setQuery(copy);
+  }
   return (
     <Wrapper className="filter-row-1 col-10 col-md-3 col-xl-3">
       {/* CATEGORY FILTER */}
       <div className="category-filter">
         <h6>CATEGORY:</h6>
         <div>
-          <button className="btn-category-item active">Ice Creame</button>
-          <button className="btn-category-item">Bakery</button>
-          <button className="btn-category-item">Cake</button>
-          <button className="btn-category-item">Others</button>
+          <button value="all" className={`btn-category-item ${category==="all"?"active":""}`} onClick={onClickCategory}>All</button>
+          <button value="ice creame" className={`btn-category-item ${category==="ice creame"?"active":""}`} onClick={onClickCategory}>Ice Creame</button>
+          <button value="bakery" className={`btn-category-item ${category==="bakery"?"active":""}`} onClick={onClickCategory}>Bakery</button>
+          <button value="cake" className={`btn-category-item ${category==="cake"?"active":""}`} onClick={onClickCategory}>Cake</button>
+          <button value="others" className={`btn-category-item ${category==="others"?"active":""}`} onClick={onClickCategory}>Others</button>
         </div>
       </div>
 
