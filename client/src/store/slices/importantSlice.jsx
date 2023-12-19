@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const importantSlice = createSlice({
     name: "user",
     initialState: {
-        gridView : false
+        gridView : true
     },
     reducers :{
         girdViewFunc(state, action){

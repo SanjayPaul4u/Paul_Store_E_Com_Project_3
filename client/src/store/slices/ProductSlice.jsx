@@ -9,7 +9,7 @@ const productSlice = createSlice({
         productsData: [],
         isError: false,
         totalResult:0,
-        contentSize: 2,
+        contentSize: 6,
         page: 1
     },
     // reducers :{

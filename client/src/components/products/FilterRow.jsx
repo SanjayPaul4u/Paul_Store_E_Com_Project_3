@@ -5,9 +5,12 @@ import { Button } from "../../styles/Button";
 import { useSearchParams } from "react-router-dom";
 import { clearFilter } from "../../store/async-thunk-helper/asyncThunkHelper";
 import { useDispatch, useSelector } from "react-redux";
+import { FaCheck } from "react-icons/fa6";
+
 
 
 const FilterRow = () => {
+  
   // GOT PRODUCT DATA by useSelector 📌
   const main_products_data = useSelector((state) => {
     return state.products;
@@ -21,6 +24,7 @@ const FilterRow = () => {
   const copy  = new URLSearchParams(query);
   const category = query.get("category");
   const price = query.get("price");
+  const color = query.get("color");
   
   const onClickCategory = (e) =>{
     copy.set("category", e.target.value);
@@ -36,6 +40,10 @@ const FilterRow = () => {
   }
   const onChangeWeight = (e)=>{
     copy.set("weight", e.target.value);
+    setQuery(copy);
+  }
+  const onClickColor = (value)=>{
+    copy.set("color", value);
     setQuery(copy);
   }
   // 📌
@@ -120,10 +128,26 @@ const FilterRow = () => {
       <div className="color-filter mt-2">
         <h6>COLORS:</h6>
         <div>
-          <button className="btn-color-item">1</button>
-          <button className="btn-color-item">2</button>
-          <button className="btn-color-item active">3</button>
-          <button className="btn-color-item">4</button>
+          <button
+          onClick={()=>{onClickColor("all")}}
+          style={{border: 'none'}} 
+          className={`btn-color-item ${color==="all"?"active": ""}`}>
+            all
+          </button>
+
+          <button
+          onClick={()=>{onClickColor("fff")}}
+          style={{backgroundColor: "#fff"}} 
+          className={`btn-color-item ${color==="fff"?"active": ""}`}>
+            {color==="fff" ? <FaCheck className="iconStyle"/>:""}
+          </button>
+
+          <button
+          onClick={()=>{onClickColor("fff000")}}
+          style={{backgroundColor: "#fff000"}} 
+          className={`btn-color-item ${color==="fff000"?"active": ""}`}>
+            {color==="fff000" ? <FaCheck className="iconStyle"/>:""}
+          </button>
         </div>
       </div>
 
@@ -203,16 +227,18 @@ const Wrapper = styled.div`
     div {
 
       .btn-color-item {
-        background-color: #dd2fc9;
         margin-right: 0.6rem;
-        height: 1.5rem;
-        width: 1.5rem;
+        height: 1.3rem;
+        width: 1.3rem;
         border-radius: 50%;
-        border: none;
+        border: 0.1rem solid #7a7a7a;
         outline: none;
-        color: ${({ theme }) => theme.colors.lowBlack};
+        color: ${({ theme }) => theme.colors.black};
         font-weight: 500;
         opacity: 0.6;
+        .iconStyle{
+          margin-top: -0.5rem;
+        }
       }
       .active {
         opacity: 1;

@@ -9,6 +9,7 @@ const addProductFunc = async (req, res)=>{ // 📌 TODO = Validation
     try {
         let success = false;
         const {name, company, price, colors, weight, description, category, shipping, stock, reviews, stars, featured, search_key_word }  = req.body;
+        console.log(colors);
         
         //📌 FILE ARRAY CREATE & PUSH ALL IMAGE FILE FOR IMAGE SCHEMA
         const file_array = [];

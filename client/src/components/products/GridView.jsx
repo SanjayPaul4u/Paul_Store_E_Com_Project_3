@@ -54,18 +54,19 @@ const GridView = ({main_products_data}) => {
 
 const Wrapper = styled.div`
   text-transform: capitalize;
+  padding: 5rem;
   padding-top: 0.5rem;
   .row-products {
-    padding: 1.5rem;
+    /* background-color: green; */
+    padding: 1rem;
     &:hover {
       padding: 0rem;
-      transition: 0.5s;
+      transition: 0.8s;
     }
     a {
       text-decoration: none;
     }
     .card {
-      /* background-color: red; */
       border: none;
       .badge-div {
         padding: 1rem;
@@ -80,7 +81,7 @@ const Wrapper = styled.div`
       }
 
       img {
-        /* height: 13rem; */
+        /* height: 15rem; */
       }
       .card-body {
         /* background-color: red; */

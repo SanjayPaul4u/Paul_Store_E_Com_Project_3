@@ -6,10 +6,10 @@ const host = "http://localhost:7000";
 let filter = '';
 
 // USE CREATE ASYNC THUNK & fetchProducts CREATE
-export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, contentSize, search, sort, category, price, company, weight})=>{
+export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, contentSize, search, sort, category, price, company, weight, color})=>{
     try {
         // search? filter = filter+`&search=${search}`:filter = filter;
-        filter = `${search && `&search=${search}`}${sort && `&sort=${sort}`}${category && `&category=${category}`}${price && `&price=${price}`}${company && `&company=${company}`}${weight && `&weight=${weight}`}`
+        filter = `${search && `&search=${search}`}${sort && `&sort=${sort}`}${category && `&category=${category}`}${price && `&price=${price}`}${company && `&company=${company}`}${weight && `&weight=${weight}`}${color && `&color=${color}`}`
 
             
         

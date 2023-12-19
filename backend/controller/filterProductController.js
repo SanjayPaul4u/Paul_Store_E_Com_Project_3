@@ -7,7 +7,7 @@ const getAllProductAndFilter = async (req, res)=>{
     try {
         const {contentSize, page, category, price, company, color, weight, search, sort} = req.query;
         let success = false;
-        
+       
         
         // FILTERING PRODUCT 📌
         const filterObj = {};
