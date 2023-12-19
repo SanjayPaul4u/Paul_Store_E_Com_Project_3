@@ -22,7 +22,7 @@ const fetchMoreFunc = () => {
 
   return (
     <Wrapper className="gird-view">
-      {isLoading && <h4>...Loading</h4>}
+      {isLoading ? <h4>...Loading</h4>: totalResult===0 && <h5>No product available with this filter</h5>}
 
       {/* INFINITE SCROLLIN 📌 */}
       <InfiniteScroll

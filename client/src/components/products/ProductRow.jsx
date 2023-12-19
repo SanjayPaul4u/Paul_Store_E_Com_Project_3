@@ -17,6 +17,9 @@ const ProductRow = () => {
   let search = query.get("search");
   let sort = query.get("sort");
   let category = query.get("category");
+  let price = query.get("price");
+  let company = query.get("company");
+  let weight = query.get("weight");
 
   if(!search){
     search = ""
@@ -26,6 +29,15 @@ const ProductRow = () => {
   }
   if(!category || category==="all"){
     category = ""
+  }
+  if(!price || price==="all"){
+    price = ""
+  }
+  if(!company || company==="all"){
+    company = ""
+  }
+  if(!weight || weight==="all"){
+    weight = ""
   }
 
   // USING DISPATCH 📌
@@ -44,7 +56,7 @@ const ProductRow = () => {
 
   // using UseEffect 📌
   useEffect(() => {
-      dispatch(fetchProducts({search, contentSize, page, sort, category}));
+      dispatch(fetchProducts({search, contentSize, page, sort, category, price, company, weight}));
 
   }, [main_products_data.search, query]);
   // console.log(main_products_data);

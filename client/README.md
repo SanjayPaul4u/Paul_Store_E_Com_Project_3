@@ -84,6 +84,13 @@
 ## (17)FRONTEND:  SORT Filter done
 
 ## (18)FRONTEND:  Category Wise Filter done
+
+## (19)FRONTEND:  Clear Filter Function and Api call Done
+    here 
+    - useSearchParams();
+    - new URLSearchParams(query);
+    - api call (in createAsyncThunk );
+        very important
     
 
     

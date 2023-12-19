@@ -1,5 +1,5 @@
 import { createSlice} from '@reduxjs/toolkit'
-import { fetchProducts, fetchMoreProducts } from '../async-thunk-helper/asyncThunkHelper'
+import { fetchProducts, fetchMoreProducts, clearFilter } from '../async-thunk-helper/asyncThunkHelper'
 
 
 const productSlice = createSlice({
@@ -16,6 +16,7 @@ const productSlice = createSlice({
     // },
 
     extraReducers : (builder)=>{
+        // fetchProducts 📌
         builder.addCase(fetchProducts.pending, (state, action)=>{
             state.isLoading = true;
         })
@@ -30,6 +31,23 @@ const productSlice = createSlice({
             state.isError = true;
         })
 
+        // clearFilter 📌
+        builder.addCase(clearFilter.pending, (state, action)=>{
+            state.isLoading = true;
+        })
+        builder.addCase(clearFilter.fulfilled, (state, action)=>{
+            // const {isLoading, productsData, totalResult} = state;
+            state.isLoading = false;
+            state.productsData = action.payload.allProductData;
+            state.totalResult = action.payload.totalResult;
+            state.page = 1;
+        })
+        builder.addCase(clearFilter.rejected, (state, action)=>{
+            state.isError = true;
+        })
+
+
+        // fetchMoreProducts 📌
         builder.addCase(fetchMoreProducts.fulfilled, (state, action)=>{
             state.isLoading = false;
             state.productsData = state.productsData.concat(action.payload.allProductData);

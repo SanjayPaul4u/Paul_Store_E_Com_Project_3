@@ -3,18 +3,45 @@ import styled from "styled-components";
 import PriceFormat from "../../helper/PriceFormat";
 import { Button } from "../../styles/Button";
 import { useSearchParams } from "react-router-dom";
-
-
+import { clearFilter } from "../../store/async-thunk-helper/asyncThunkHelper";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const FilterRow = () => {
+  // GOT PRODUCT DATA by useSelector 📌
+  const main_products_data = useSelector((state) => {
+    return state.products;
+  });
+  const { contentSize, page} = main_products_data;
+  const dispatch = useDispatch();
+
+  // 📌
   const [query, setQuery] = useSearchParams();
+  // console.log(copy.size);
   const copy  = new URLSearchParams(query);
   const category = query.get("category");
+  const price = query.get("price");
   
   const onClickCategory = (e) =>{
     copy.set("category", e.target.value);
     setQuery(copy);
+  }
+  const onClickPrice = (e)=>{
+    copy.set("price", e.target.value);
+    setQuery(copy);
+  }
+  const onChangeCompany = (e)=>{
+    copy.set("company", e.target.value);
+    setQuery(copy);
+  }
+  const onChangeWeight = (e)=>{
+    copy.set("weight", e.target.value);
+    setQuery(copy);
+  }
+  // 📌
+  const clearFilterFunc = ()=>{
+    setQuery({});
+    dispatch(clearFilter({contentSize, page}));
   }
   return (
     <Wrapper className="filter-row-1 col-10 col-md-3 col-xl-3">
@@ -31,53 +58,66 @@ const FilterRow = () => {
       </div>
 
       {/* PRICE FILTER */}
-      <div className="price-filter mt-4">
+      <div className="price-filter mt-2">
         <h6>PRICE:</h6>
         <div>
-          <button className="btn-price-item active">
+          <button value="all" className={`btn-price-item ${price==="all"?"active":""}`} onClick={onClickPrice}>
+            All
+          </button>
+          <button value="0-500" className={`btn-price-item ${price==="0-500"?"active":""}`} onClick={onClickPrice}>
             <PriceFormat price={0}/> - <PriceFormat price={500*100}/>
           </button>
-          <button className="btn-price-item">
+          <button value="500-1000" className={`btn-price-item ${price==="500-1000"?"active":""}`} onClick={onClickPrice}>
             <PriceFormat price={500*100}/> - <PriceFormat price={1000*100}/>
           </button>
-          <button className="btn-price-item">
+          <button value="1000-9000" className={`btn-price-item ${price==="1000-9000"?"active":""}`} onClick={onClickPrice}>
             <PriceFormat price={1000*100}/> - <PriceFormat price={9000*100}/>
           </button>
-          <button className="btn-price-item">
+          <button value="9000-above" className={`btn-price-item ${price==="9000-above"?"active":""}`} onClick={onClickPrice}>
             <PriceFormat price={9000*100}/> - Above
           </button>
         </div>
       </div>
 
       {/* COMPANY FILTER */}
-      <div className="company-filter mt-4">
+      <div className="company-filter mt-2">
         <h6>COMPANY:</h6>
         <div>
-          <select className="form-select" aria-label="Default select example">
-              <option value="">All</option>
-              <option value="">Alpana</option>
-              <option value="">Tropolight</option>
-              <option value="">Crust and Cumb</option>
-              <option value="">Ship Brand</option>
+          <select className="form-select" aria-label="Default select example"
+          onChange={onChangeCompany}
+          >
+              <option value="all">All</option>
+              <option value="deccan">Deccan</option>
+              <option value="tower">Tower</option>
+              <option value="ship brand">Ship Brand</option>
+              <option value="mohan">Mohan</option>
+              <option value="unknown">Unknown</option>
           </select>
         </div>
       </div>
 
       {/* WEIGHT FILTER */}
-      <div className="weight-filter mt-4">
+      <div className="weight-filter mt-2">
         <h6>WEIGHT:</h6>
         <div>
-          <select className="form-select" aria-label="Default select example">
-              <option value="">500 g</option>
-              <option value="">1 kg</option>
-              <option value="">2.5 kg</option>
-              <option value="">10 kg</option>
+          <select className="form-select" aria-label="Default select example"
+          onChange={onChangeWeight}
+          >
+              <option value="all">All</option>
+              <option value="500 g">500 g</option>
+              <option value="800 g">800 g</option>
+              <option value="1 kg">1 kg</option>
+              <option value="2.5 kg">2.5 kg</option>
+              <option value="5 kg">5 kg</option>
+              <option value="10 kg">10 kg</option>
+              <option value="15kg">15kg</option>
+              <option value="25 kg">25 kg</option>
           </select>
         </div>
       </div>
 
       {/* COLORS FILTER */}
-      <div className="color-filter mt-4">
+      <div className="color-filter mt-2">
         <h6>COLORS:</h6>
         <div>
           <button className="btn-color-item">1</button>
@@ -87,8 +127,11 @@ const FilterRow = () => {
         </div>
       </div>
 
-      <Button>
-        Clear Cart
+      <Button
+      disabled = {copy.size===0}
+      id={copy.size===0? "disable":""}
+      onClick={clearFilterFunc}>
+        Clear Filter
       </Button>
     </Wrapper>
   );
@@ -176,6 +219,11 @@ const Wrapper = styled.div`
         font-weight: 500;
       }
     }
+  }
+
+
+  #disable{
+    opacity: 0.7;
   }
 `;
 export default FilterRow;
