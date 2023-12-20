@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import {useParams} from 'react-router-dom'
 import SingleImage from './SingleImage'
 import SingleData from './SingleData'
+import { fetchSingleProduct } from '../../store/async-thunk-helper/asyncThunkHelper'
+import {useDispatch, useSelector} from 'react-redux'
 
 
 
 const SingleProduct = () => {
   const {id}  = useParams();
+  const dispatch = useDispatch();
+
+  // Use Effect 📌
+  useEffect(() => {
+    dispatch(fetchSingleProduct({id}));
+  }, []);
+ 
+  // Use Use Selector 📌
+  const main_products_data = useSelector((state)=>{
+    return state.products;
+  });
+  const {singleProductData} = main_products_data;
+
+
   return (
     <Wrapper>
       <div className="header">
@@ -20,10 +36,10 @@ const SingleProduct = () => {
         <div className='container'>       
         <div className="row single-product-body">
           <div className="img-row col-6 col-md-6 col-xl-6">
-            <SingleImage/>
+            <SingleImage singleProductData={singleProductData}/>
           </div>
           <div className="data-row col-6 col-md-6 col-xl-6">
-            <SingleData/>
+            <SingleData singleProductData={singleProductData}/>
           </div>
         </div>
         </div>

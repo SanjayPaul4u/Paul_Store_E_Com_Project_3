@@ -93,6 +93,8 @@
         very important
     
 ## (20) FRONTEND:  Color Filter Function Done & PRODUCT PAGE DONE🔥
+
+## (21) FRONTEND:  Single Product page almost done 🔥
     
 
     

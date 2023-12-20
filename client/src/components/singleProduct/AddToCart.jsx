@@ -6,7 +6,8 @@ import CartAmountToggle from './CartAmountToggle';
 
 
 
-const AddToCart = () => {
+const AddToCart = ({singleProductData}) => {
+  const {colors} = singleProductData;
   const [Quantity, setQuantity] = useState(1);
   // IncrementFunc
   const IncrementFunc = ()=>{
@@ -17,18 +18,19 @@ const AddToCart = () => {
   const DecrementFunc = ()=>{
     Quantity > 1 ?  setQuantity(Quantity - 1): Quantity;
   }
-  console.log(Quantity);
+  // console.log(colors);
   return (
     <Wrapper>
-        <div className="color-choose mt-4">
+        {colors && colors.length > 0 && <div className="color-choose mt-4">
           <span>Colors: </span>
             <div>
-              <button className="btn-color-item"></button>
-              <button className="btn-color-item"></button>
-              <button className="btn-color-item active"></button>
-              <button className="btn-color-item"></button>
+              {colors.map((element, index)=>{
+                return <button key={index}
+                 style={{backgroundColor: `#${element}`}}
+                 className="btn-color-item"></button>
+              })}
             </div>
-        </div>
+        </div>}
 
         <CartAmountToggle 
         quantity ={Quantity} 
@@ -57,7 +59,7 @@ const Wrapper = styled.div`
         height: 1rem;
         width: 1rem;
         border-radius: 50%;
-        border: none;
+        border: 0.1rem solid #7a7a7a;
         outline: none;
         color: ${({ theme }) => theme.colors.lowBlack};
         font-weight: 500;

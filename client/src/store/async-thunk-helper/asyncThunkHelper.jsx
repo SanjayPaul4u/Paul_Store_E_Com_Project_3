@@ -5,7 +5,7 @@ import axios from 'axios'
 const host = "http://localhost:7000";
 let filter = '';
 
-// USE CREATE ASYNC THUNK & fetchProducts CREATE
+// fetchProducts📌 CREATE USEING CREATE ASYNC THUNK
 export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, contentSize, search, sort, category, price, company, weight, color})=>{
     try {
         // search? filter = filter+`&search=${search}`:filter = filter;
@@ -28,7 +28,7 @@ export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, con
 })
 
 
-// fetchMoreProducts CREATE for infinite scrolling
+// fetchMoreProducts📌 CREATE for infinite scrolling
 export const fetchMoreProducts = createAsyncThunk("fetchMoreProducts", async ({contentSize, page})=>{
     try {
         
@@ -47,7 +47,7 @@ export const fetchMoreProducts = createAsyncThunk("fetchMoreProducts", async ({c
 })
 
 
-// CLEAR FILTER 
+// CLEAR FILTER 📌
 export const clearFilter = createAsyncThunk("clearFilter", async ({contentSize, page})=>{
     try {
         filter = ''
@@ -57,10 +57,30 @@ export const clearFilter = createAsyncThunk("clearFilter", async ({contentSize, 
             headers: {
                 "Content-Type": "application/json" //important
             }    
-        })
+        });
         const data = await response.data;
-        console.log(data);
+        // console.log(data);
         return data;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+// Fetch Single Product📌
+export const fetchSingleProduct = createAsyncThunk("fetchSingleProduct",async({id})=>{
+    try {
+        const response = await axios({
+            method: "get",
+            url: `${host}/api/products/allproduct/${id}`,
+            headers: {
+                "Content-Type": "application/json" //important
+            }
+        });
+        const data = await response.data;
+        // console.log(data);
+        return data;
+
     } catch (error) {
         console.log(error);
     }

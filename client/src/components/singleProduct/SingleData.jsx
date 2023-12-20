@@ -1,44 +1,39 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FaStar } from "react-icons/fa6";
 import PriceFormat from '../../helper/PriceFormat'
 import { TbTruckDelivery } from "react-icons/tb";
 import { TbReplace } from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
 import { FaAmazonPay } from "react-icons/fa";
 import AddToCart from './AddToCart';
+import Stars from './Stars';
 
 
-const SingleData = () => {
+const SingleData = ({singleProductData}) => {
+  const {product_id, name, company, description, weight, stars, reviews, price} = singleProductData;
+  // console.log(colors);
   return (
     <Wrapper>
         <p className='visit-store'>Visit PualStore</p>
-        <h3 className='product-name'>Magic Powder</h3>
-        <p className='product-description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolor eligendi corrupti magnam est nobis perferendis quaerat Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, autem!</p>
+        <h3 className='product-name'>{name}</h3>
+        <p className='product-description'>{description}</p>
 
-        <p className='product-weight'>Weight: <span>1 kg</span></p>
+        <p className='product-weight'>Weight: <span>{weight}</span></p>
 
-        <p className='rateAndReview'>
-          <FaStar className='star-icon-style'/>
-          <FaStar className='star-icon-style'/>
-          <FaStar className='star-icon-style'/>
-          <FaStar className='star-icon-style'/>
-          <FaStar className='star-icon-style'/>
-           <span> ( 55 Reviews )</span>
-        </p>
+        <Stars stars={stars} reviews={reviews}/>        
 
         <p className='del-mrp'>
-            MRP: <del><PriceFormat price={(999*100)*1.50}/></del>
+            MRP: <del><PriceFormat price={(price*100)*1.50}/></del>
         </p>
-        <h6 className='actual-price'>Buy Now: <PriceFormat price={999*100}/></h6>
+        <h6 className='actual-price'>Buy Now: <PriceFormat price={price*100}/></h6>
 
 
         {/* Add to Cart */}
-        <AddToCart/>
+        <AddToCart singleProductData={singleProductData}/>
 
         <p className='stock'>Available: <span>In Stock</span></p>
-        <p className='id'>Id: <span>78aa56df5665dfdb</span></p>
-        <p className='brand'>Brand: <span>Tower</span></p>
+        <p className='id'>Id: <span>{product_id}</span></p>
+        <p className='brand'>Brand: <span>{company}</span></p>
 
         <hr />
         
@@ -65,6 +60,7 @@ const SingleData = () => {
 }
 const Wrapper = styled.div`
 font-family: ${({theme})=>theme.fonts.font2};
+text-transform: capitalize;
   .visit-store{
     color: ${({theme})=>theme.colors.lowBlack};
     margin-bottom: -0.1rem;

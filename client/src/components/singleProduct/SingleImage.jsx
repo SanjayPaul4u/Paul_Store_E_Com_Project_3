@@ -1,36 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import Img from '/img3.png'
 
 
-const SingleImage = () => {
+const SingleImage = ({singleProductData}) => {
+    const [mainImage, setMainImage] = useState(0);
+    const {image, category} = singleProductData;
+    // console.log(image);
+
+    const setMainImageFunc = (index)=>{
+        setMainImage(index);
+    }
   return (
-    <Wrapper className='col-6 col-md-6 col-xl-6'>
+    <>
+    {image && <Wrapper className='col-6 col-md-6 col-xl-6'>
         <div className="card position-relative">
              {/* badge */}
              <div className='badge-div position-absolute'>
                 <span className=" badge">
-                    IceCreame bakery
+                    {category} Item
                 </span>          
             </div> 
-            <img src={Img} className="main-image card-img-top" alt="single-main-img-err"/>
+            <img src={`data:${image[mainImage].fileType};base64,${image[mainImage].imagebase64}`} className="main-image card-img-top" alt="single-main-img-err"/>
         </div>
 
         <div className="other-images row">
-            <div className="col-3 col-md-3 col-xl-3">
-                <img src={Img} className="other-image card-img-top" alt="single-main-img-err"/>
-            </div>
-            <div className="col-3 col-md-3 col-xl-3">
-                <img src={Img} className="other-image card-img-top" alt="single-main-img-err"/>
-            </div>
-            <div className="col-3 col-md-3 col-xl-3">
-                <img src={Img} className="other-image card-img-top" alt="single-main-img-err"/>
-            </div>
-            <div className="col-3 col-md-3 col-xl-3">
-                <img src={Img} className="other-image card-img-top" alt="single-main-img-err"/>
-            </div>
+            {image.map((e, index)=>{
+                return <div
+                    key={e.filePath}
+                    onClick={()=>{setMainImageFunc(index)}}
+                    className="col-3 col-md-3 col-xl-3">
+                    <img src={`data:${e.fileType};base64,${e.imagebase64}`} 
+                    className="other-image card-img-top" alt="single-main-img-err"/>
+                </div>
+            })}
         </div>        
-    </Wrapper>
+    </Wrapper>}
+    </>
   )
 }
 const Wrapper = styled.div`
@@ -53,9 +58,14 @@ const Wrapper = styled.div`
         
     }
     .other-images{
+        /* background-color: red; */
+        display: flex;
+        align-items: flex-end;
         padding-top: 1rem;
         .other-image{
+            cursor: pointer;
             box-shadow: 0.1rem 0.2rem 2rem #bcbcbc;
+            margin-bottom: 0;
         }
                 
     }
