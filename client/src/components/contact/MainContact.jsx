@@ -48,6 +48,8 @@ const MainContact = () => {
 }
 
 const Wrapper = styled.section`
+    min-height: 100vh;
+    max-height: auto;
     padding-top: 4rem;
     font-family: ${({theme})=> theme.fonts.font2};
     .main-contact{

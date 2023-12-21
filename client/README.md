@@ -101,6 +101,8 @@
 ## (23) FRONTEND:  Login and SignUp Page Styling Done
 
 ## (24) FRONTEND:  Contact Page Styling Done
+
+## (25) FRONTEND:  Footer Component Styling Done
     
 
     
