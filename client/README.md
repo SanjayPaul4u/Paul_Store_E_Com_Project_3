@@ -99,6 +99,8 @@
 ## (22) FRONTEND:  Cart Page Styling Done
 
 ## (23) FRONTEND:  Login and SignUp Page Styling Done
+
+## (24) FRONTEND:  Contact Page Styling Done
     
 
     

@@ -9,6 +9,8 @@ import SingleProduct from './components/singleProduct/SingleProduct'
 import MainCart from './components/cart/MainCart'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import MainContact from './components/contact/MainContact'
+
 
 
 const App = () => {
@@ -45,6 +47,8 @@ const App = () => {
           <Route exact path="/cart" element={<MainCart/>}/>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/signup" element={<Signup/>}/>
+          <Route exact path="/signup" element={<Signup/>}/>
+          <Route exact path="/contact" element={<MainContact/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

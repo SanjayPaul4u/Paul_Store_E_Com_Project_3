@@ -19,11 +19,23 @@ const Navbar = () => {
             <div className="" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
+                <NavLink className="nav-link nav-link-hover" aria-current="page" to="/signup">SignUp</NavLink>
+                </li>  
+
+                <li className="nav-item">
+                <NavLink className="nav-link nav-link-hover" aria-current="page" to="/login">LogIn</NavLink>
+                </li>  
+
+                <li className="nav-item">
                 <NavLink className="nav-link nav-link-hover" aria-current="page" to="/home">Home</NavLink>
                 </li>   
-                            
+                         
                 <li className="nav-item">
                 <NavLink className="nav-link nav-link-hover" aria-current="page" to="/products">Products</NavLink>
+                </li>   
+
+                <li className="nav-item">
+                <NavLink className="nav-link nav-link-hover" aria-current="page" to="/contact">Contact</NavLink>
                 </li>   
 
                 <li className="nav-item">
