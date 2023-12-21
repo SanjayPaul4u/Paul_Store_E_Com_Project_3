@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { FaRegUserCircle } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 
 
@@ -23,6 +24,11 @@ const Navbar = () => {
                             
                 <li className="nav-item">
                 <NavLink className="nav-link nav-link-hover" aria-current="page" to="/products">Products</NavLink>
+                </li>   
+
+                <li className="nav-item">
+                <NavLink
+                className="nav-link nav-link-hover" aria-current="page" to="/cart"><FaShoppingCart className='iconStyle'/></NavLink>
                 </li>   
 
                 <li className="nav-item">

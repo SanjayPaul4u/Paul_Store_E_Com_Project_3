@@ -10,7 +10,7 @@ const Stars = ({ stars, reviews }) => {
       <span key={index}>
         {stars >= index + 1 ? (
           <FaStar className="star-icon-style" />
-        ) : stars > number ? (
+        ) : stars >= number ? (
           <FaStarHalfAlt className="star-icon-style" />
         ) : (
           <AiOutlineStar className="star-icon-style" />

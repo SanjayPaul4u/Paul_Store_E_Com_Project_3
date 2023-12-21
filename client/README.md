@@ -95,6 +95,8 @@
 ## (20) FRONTEND:  Color Filter Function Done & PRODUCT PAGE DONE🔥
 
 ## (21) FRONTEND:  Single Product page almost done 🔥
+
+## (22) FRONTEND:  Cart Page Styling Done
     
 
     
