@@ -97,6 +97,8 @@
 ## (21) FRONTEND:  Single Product page almost done 🔥
 
 ## (22) FRONTEND:  Cart Page Styling Done
+
+## (23) FRONTEND:  Login and SignUp Page Styling Done
     
 
     

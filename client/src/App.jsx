@@ -7,7 +7,8 @@ import Home from './components/home/Home'
 import MainProducts from './components/products/MainProducts'
 import SingleProduct from './components/singleProduct/SingleProduct'
 import MainCart from './components/cart/MainCart'
-
+import Login from './components/Login'
+import Signup from './components/Signup'
 
 
 const App = () => {
@@ -42,6 +43,8 @@ const App = () => {
           <Route exact path="/products/aaa" element={<Home/>}/>
           <Route exact path="/products/:id" element={<SingleProduct/>}/>
           <Route exact path="/cart" element={<MainCart/>}/>
+          <Route exact path="/login" element={<Login/>}/>
+          <Route exact path="/signup" element={<Signup/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
