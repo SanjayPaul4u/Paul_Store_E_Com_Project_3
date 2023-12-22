@@ -106,6 +106,8 @@
 
 ## (26) FRONTEND:  Home page styling done
 
+## (27) FRONTEND:  Login, Signup & GetUser Api Calling Done 🔥
+
     
 
     

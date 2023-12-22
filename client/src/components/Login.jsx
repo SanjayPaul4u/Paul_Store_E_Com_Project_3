@@ -1,23 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
+import { LoingApiCall } from '../store/async-thunk-helper/asyncThunkHelper2'
+import {useDispatch} from 'react-redux'
+
+
 
 
 const Login = () => {
+  // using useDispatch
+  const dispatch = useDispatch();
+
+  // using "useState"
+  const [loginData, setLoginData] = useState({
+    email: "", password: ""
+  });
+  const {email, password} = loginData;
+
+  // onChange function
+  const onChangeFunc = (event)=>{
+    setLoginData({...loginData, [event.target.name] : event.target.value})
+  }
+
+  // loginSubmitFunc
+  const loginSubmitFunc = (e) =>{
+    e.preventDefault();
+    dispatch(LoingApiCall({loginData}));
+  }
   return (
     <Wrapper className='container' id='main-login'>
         <div id="sub-login-div" className='col-10 col-md-6 col-xl-4'>
           <div id='heading-div'>
             <h3>Login</h3>
           </div>
-          <form>
+          <form onSubmit={loginSubmitFunc}>
             <div className="mb-3">
               <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' minLength={2} maxLength={25}/>
+              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' minLength={2} maxLength={25} value={email} onChange={onChangeFunc}/>
             </div>
             <div className="mb-3">
               <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-              <input type="password" className="form-control" id="exampleInputPassword1" name='password' minLength={2} maxLength={25}/>
+              <input type="password" className="form-control" id="exampleInputPassword1" name='password' minLength={2} maxLength={25} value={password} onChange={onChangeFunc}/>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
 

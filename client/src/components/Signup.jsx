@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink} from 'react-router-dom'
 import styled from 'styled-components'
+import { SignupApiCall } from '../store/async-thunk-helper/asyncThunkHelper2'
+import { useDispatch } from 'react-redux'
 
 
 
 const Signup = () => {
+  // using "useDispatch"
+  const dispatch = useDispatch();
+  
+  // using "useState"
+  const [signUpData, setSignUpData] = useState({
+    name : "", email: "", password: "", confirmPassword:"" 
+  });
+  const {name, email, password, confirmPassword} = signUpData;
+
+  // onChange function
+  const onChangeFunc = (event)=>{
+    setSignUpData({...signUpData, [event.target.name] : event.target.value})
+  }
+
+  // signupSubmitFunc
+  const signupSubmitFunc = (e) =>{
+    e.preventDefault();
+    dispatch(SignupApiCall({signUpData}));
+  }
   return (
     <Wrapper className='container' id='main-signup'>
         <div id="sub-signup-div" className='col-10 col-md-6 col-xl-4'>
@@ -12,26 +33,26 @@ const Signup = () => {
             <h3>SignUp</h3>
             <p>Creat Account</p> 
           </div>
-          <form>
+          <form onSubmit={signupSubmitFunc}>
 
             <div className="mb-3">
               <label htmlFor="exampleInputName1" className="form-label">Name</label>
-              <input type="text" className="form-control" id="exampleInputName1" aria-describedby="nameHelp" name='name' minLength={3} maxLength={25}/>
+              <input type="text" className="form-control" id="exampleInputName1" aria-describedby="nameHelp" name='name' minLength={3} maxLength={25} value={name} onChange={onChangeFunc}/>
             </div>
 
             <div className="mb-3">
               <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email'/>
+              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' value={email} onChange={onChangeFunc}/>
             </div>
 
             <div className="mb-3">
               <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-              <input type="password" className="form-control" id="exampleInputPassword1" name='password' minLength={3} maxLength={20}/>
+              <input type="password" className="form-control" id="exampleInputPassword1" name='password' minLength={3} maxLength={20} value={password} onChange={onChangeFunc}/>
             </div>
 
             <div className="mb-3">
               <label htmlFor="exampleInputConfirmPassword1" className="form-label">Confirm Password</label>
-              <input type="password" className="form-control" id="exampleInputConfirmPassword1" name='confirmPassword'  minLength={3} maxLength={20}/>
+              <input type="password" className="form-control" id="exampleInputConfirmPassword1" name='confirmPassword'  minLength={3} maxLength={20} value={confirmPassword} onChange={onChangeFunc}/>
             </div>
 
             <button type="submit" className="btn btn-primary">Submit</button>
