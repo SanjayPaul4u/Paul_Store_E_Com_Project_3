@@ -5,8 +5,7 @@ import { fetchProducts } from '../../store/async-thunk-helper/asyncThunkHelper'
 import OurProduct from '../products/OurProduct'
 import {Button} from '../../styles/Button'
 import { NavLink } from 'react-router-dom'
-import { getUserApiCall } from '../../store/async-thunk-helper/asyncThunkHelper2'
-import GetCookie from '../../hooks/getCookie'
+
 
 
 const Features = () => {
@@ -22,10 +21,8 @@ const Features = () => {
   // USING useEffect
   useEffect(() => {
     dispatch(fetchProducts({contentSize, page}));
-    if(GetCookie("paul-store-token")){
-      dispatch(getUserApiCall());
-    }
-  }, [])
+    
+  }, []);
   
 
   return (

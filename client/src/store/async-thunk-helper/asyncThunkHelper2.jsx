@@ -18,11 +18,12 @@ export const getUserApiCall = createAsyncThunk("getUserApiCall", async()=>{
         });
 
         const data = await response.data;
-        console.log(data);
+        // console.log(data);
         return data;
     } catch (error) {
         console.log("getUserApiCall Error********");
         console.log(error);
+        return error.response.data;
     }
 });
 export const LoingApiCall = createAsyncThunk("LoingApiCall", async({loginData})=>{
@@ -42,6 +43,7 @@ export const LoingApiCall = createAsyncThunk("LoingApiCall", async({loginData})=
     } catch (error) {
         console.log("LoingApiCall Error********");
         console.log(error);
+        return error.response.data;
     }
 });
 export const SignupApiCall = createAsyncThunk("SignupApiCall", async({signUpData})=>{
@@ -61,5 +63,6 @@ export const SignupApiCall = createAsyncThunk("SignupApiCall", async({signUpData
     } catch (error) {
         console.log("SignupApiCall Error********");
         console.log(error);
+        return error.response.data;
     }
 });

@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
-import { NavLink} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useNavigate} from 'react-router-dom'
 import styled from 'styled-components'
 import { SignupApiCall } from '../store/async-thunk-helper/asyncThunkHelper2'
+import { setAlertFunc, removeAlertFunc } from '../store/slices/importantSlice'
 import { useDispatch } from 'react-redux'
+import GetCookie from '../hooks/getCookie'
+
 
 
 
 const Signup = () => {
+  // using "useNavigate"
+  const navigate = useNavigate();
+
   // using "useDispatch"
   const dispatch = useDispatch();
   
@@ -22,10 +28,30 @@ const Signup = () => {
   }
 
   // signupSubmitFunc
-  const signupSubmitFunc = (e) =>{
+  const signupSubmitFunc = async(e) =>{
     e.preventDefault();
-    dispatch(SignupApiCall({signUpData}));
+    const a = await dispatch(SignupApiCall({signUpData}));
+
+    if(a.payload.success){
+      dispatch(setAlertFunc({type: "success", message: a.payload.message}));
+      setSignUpData({name : "", email: "", password: "", confirmPassword:""});
+      navigate(-1);
+    }else{
+      dispatch(setAlertFunc({type: "error", message: a.payload.message}));
+    }
+
+    setTimeout(() => {
+      dispatch(removeAlertFunc());
+    }, 3000);
   }
+
+  // use Effect
+  useEffect(() => {
+    if(GetCookie("paul-store-token")){
+      navigate(-1);
+    }
+  }, [])
+  
   return (
     <Wrapper className='container' id='main-signup'>
         <div id="sub-signup-div" className='col-10 col-md-6 col-xl-4'>

@@ -11,6 +11,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import MainContact from './components/contact/MainContact'
 import Footer from './components/Footer'
+import MainAlert from './components/alert-comp/MainAlert'
 
 
 
@@ -40,6 +41,7 @@ const App = () => {
       <BrowserRouter>
         <GlobalStyle/>
         <Header/>
+        <MainAlert/>
         <Routes>          
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/home" element={<Home/>}/>

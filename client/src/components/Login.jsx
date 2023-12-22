@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
-import {NavLink} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import {NavLink, useNavigate} from 'react-router-dom'
 import styled from 'styled-components'
 import { LoingApiCall } from '../store/async-thunk-helper/asyncThunkHelper2'
 import {useDispatch} from 'react-redux'
-
+import { setAlertFunc, removeAlertFunc } from '../store/slices/importantSlice'
+import GetCookie from '../hooks/getCookie'
 
 
 
 const Login = () => {
+  // using useNavigate
+  const navigate = useNavigate();
+
   // using useDispatch
   const dispatch = useDispatch();
 
@@ -23,10 +27,28 @@ const Login = () => {
   }
 
   // loginSubmitFunc
-  const loginSubmitFunc = (e) =>{
+  const loginSubmitFunc = async(e) =>{
     e.preventDefault();
-    dispatch(LoingApiCall({loginData}));
+    const a = await dispatch(LoingApiCall({loginData}));
+    if(a.payload.success){
+      dispatch(setAlertFunc({type: "success", message: a.payload.message}));
+      setLoginData({email: "", password: ""});
+      navigate(-1);
+    }else{
+      dispatch(setAlertFunc({type: "error", message: a.payload.message}));
+    }
+    
+    setTimeout(() => {
+      dispatch(removeAlertFunc());
+    }, 3000);
   }
+
+  // use Effect
+  useEffect(() => {
+    if(GetCookie("paul-store-token")){
+      navigate(-1);
+    }
+  }, [])
   return (
     <Wrapper className='container' id='main-login'>
         <div id="sub-login-div" className='col-10 col-md-6 col-xl-4'>
