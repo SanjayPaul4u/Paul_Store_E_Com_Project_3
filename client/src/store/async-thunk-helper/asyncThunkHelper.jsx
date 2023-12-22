@@ -24,6 +24,7 @@ export const fetchProducts = createAsyncThunk("fetchProducts", async ({page, con
         return data;
     } catch (error) {
         console.log(error);
+        return error.response.data;
     }
 })
 
@@ -43,6 +44,7 @@ export const fetchMoreProducts = createAsyncThunk("fetchMoreProducts", async ({c
         return data;
     } catch (error) {
         console.log(error);
+        return error.response.data;
     }
 })
 
@@ -63,6 +65,7 @@ export const clearFilter = createAsyncThunk("clearFilter", async ({contentSize, 
         return data;
     } catch (error) {
         console.log(error);
+        return error.response.data;
     }
 })
 
@@ -83,5 +86,6 @@ export const fetchSingleProduct = createAsyncThunk("fetchSingleProduct",async({i
 
     } catch (error) {
         console.log(error);
+        return error.response.data;
     }
 })
