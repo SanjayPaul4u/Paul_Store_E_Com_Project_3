@@ -1,14 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import {Button} from '../../styles/Button'
 import styled from 'styled-components';
 import CartAmountToggle from './CartAmountToggle';
+import {useNavigate} from 'react-router-dom'
+import { FaCheck } from "react-icons/fa6";
+import GetCookie from '../../hooks/getCookie';
 
 
 
 const AddToCart = ({singleProductData}) => {
-  const {colors} = singleProductData;
+  const {colors, product_id, name, price, stock, image, weight} = singleProductData;
   const [Quantity, setQuantity] = useState(1);
+  const [Color, setColor] = useState(""); // check useEffect
+  const [cartData, setCartData] = useState({
+    product_id: "",
+    name: "",
+    color: "",
+    weight: "",
+    quantity: 0, 
+    price: 0,
+    max_quantity: 0,
+    image: []
+  })
+
+  // using useNavigate
+  const navigate = useNavigate();
+  
   // IncrementFunc
   const IncrementFunc = ()=>{
     Quantity < 10 ?  setQuantity(Quantity + 1): Quantity;
@@ -18,7 +36,38 @@ const AddToCart = ({singleProductData}) => {
   const DecrementFunc = ()=>{
     Quantity > 1 ?  setQuantity(Quantity - 1): Quantity;
   }
-  // console.log(colors);
+  // onclickColor 
+  const onclickColor = (color) =>{
+    setColor(color);
+  }
+  // useEffect
+  useEffect(() => {
+    if(colors && colors.length>0 && Color===""){
+      setColor(colors[0]);
+    }
+    if(image){
+    setCartData({
+      product_id: product_id,
+      name: name,
+      color: Color,
+      weight: weight,
+      quantity: Quantity, 
+      price: price,
+      max_quantity: stock,
+      image: [image[0]]
+    })}
+  }, [singleProductData, Quantity, Color])
+  
+  // addToCartFunc
+  const addToCartFunc = ()=>{
+    if(GetCookie("paul-store-token")){
+      console.log(cartData);
+      navigate("/cart");
+    }else{
+      navigate("/login");
+    }
+  }
+  // console.log(Color);
   return (
     <Wrapper>
         {colors && colors.length > 0 && <div className="color-choose mt-4">
@@ -26,8 +75,12 @@ const AddToCart = ({singleProductData}) => {
             <div>
               {colors.map((element, index)=>{
                 return <button key={index}
+                 onClick={()=>{onclickColor(element)}}
                  style={{backgroundColor: `#${element}`}}
-                 className="btn-color-item"></button>
+                 className={`btn-color-item ${Color===element && "active"}`}
+                 >
+                  {Color===element && <FaCheck className='iconStyle'/>}
+                 </button>
               })}
             </div>
         </div>}
@@ -38,7 +91,7 @@ const AddToCart = ({singleProductData}) => {
         Decrement = {DecrementFunc}
         />
 
-        <Button style={{backgroundColor: "#00b973"}}>
+        <Button style={{backgroundColor: "#00b973"}} onClick={addToCartFunc}>
             <FaShoppingCart />  Add To Cart
         </Button>
     </Wrapper>
@@ -63,7 +116,10 @@ const Wrapper = styled.div`
         outline: none;
         color: ${({ theme }) => theme.colors.lowBlack};
         font-weight: 500;
-        opacity: 0.6;
+        opacity: 0.4;
+        .iconStyle{
+          margin-top: -0.6rem;
+        }
       }
       .active {
         opacity: 1;

@@ -114,6 +114,8 @@
 
 ## (29) FRONTEND:  Work Done on Alert Component
 
+## (30) FRONTEND:  Data Preparing for Add to Cart api call
+
     
 
     

@@ -3,7 +3,7 @@ import { fetchProducts, fetchMoreProducts, clearFilter, fetchSingleProduct } fro
 
 
 const productSlice = createSlice({
-    name: "user",
+    name: "product",
     initialState: {
         isLoading: false,
         productsData: [],
