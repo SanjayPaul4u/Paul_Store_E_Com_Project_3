@@ -108,6 +108,10 @@
 
 ## (27) FRONTEND:  Login, Signup & GetUser Api Calling Done 🔥
 
+## (28) FRONTEND:  Store Token in js-cookie 🔥
+    - npm i js-cookie
+    - hooks create
+
     
 
     

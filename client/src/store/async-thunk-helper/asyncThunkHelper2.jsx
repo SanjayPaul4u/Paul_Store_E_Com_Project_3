@@ -1,11 +1,14 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
+import SetCookie from '../../hooks/setCookie';
+import GetCookie from '../../hooks/getCookie';
 
 const host = "http://localhost:7000";
 
+
 export const getUserApiCall = createAsyncThunk("getUserApiCall", async()=>{
     try {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU4NTEzNDJlNDQxNjEyNDA4YTIyYzQzIn0sImlhdCI6MTcwMzIyMDAzNH0.Q9dhZKZP0sRevFQVnzJNwVEny_-tedxUv2pAIeZwIEw";
+        const token = GetCookie("paul-store-token");
         const response = await axios({
             method: "get",
             url: `${host}/api/auth/getuser/${token}`,
@@ -34,6 +37,7 @@ export const LoingApiCall = createAsyncThunk("LoingApiCall", async({loginData})=
         });
 
         const data = await response.data;
+        SetCookie("paul-store-token", data.token);
         return data;
     } catch (error) {
         console.log("LoingApiCall Error********");
@@ -52,6 +56,7 @@ export const SignupApiCall = createAsyncThunk("SignupApiCall", async({signUpData
         });
 
         const data = await response.data;
+        SetCookie("paul-store-token", data.token);
         return data;
     } catch (error) {
         console.log("SignupApiCall Error********");
