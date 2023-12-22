@@ -103,6 +103,9 @@
 ## (24) FRONTEND:  Contact Page Styling Done
 
 ## (25) FRONTEND:  Footer Component Styling Done
+
+## (26) FRONTEND:  Home page styling done
+
     
 
     
