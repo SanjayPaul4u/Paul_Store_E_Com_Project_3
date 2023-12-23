@@ -7,8 +7,8 @@ import { RiDeleteBack2Fill } from "react-icons/ri";
 
 
 
-const UserCartData = ({data}) => {
-    const {name, color, weight, quantity, price, max_quantity, image} = data;
+const UserCartData = ({data, deleteCartProductFunc}) => {
+    const {name, color, weight, quantity, price, max_quantity, image, _id} = data;
 
     
   return (
@@ -21,7 +21,7 @@ const UserCartData = ({data}) => {
 
             <div className="product-details">
                 <h5>{name}</h5>
-                <p>color</p>
+                {color!=="" && <p>color: <button className='clrBtn' style={{color:`#${color}`, backgroundColor:`#${color}`}}>1</button></p>}
                 <p>{weight}</p>
             </div>
         </div>
@@ -39,7 +39,7 @@ const UserCartData = ({data}) => {
         </div>
 
         <div className="delete-item col-md-1 col-xl-1">
-            <RiDeleteBack2Fill className='iconStyle'/>
+            <RiDeleteBack2Fill className='iconStyle' onClick={()=>{deleteCartProductFunc(_id)}}/>
         </div>
   </Wrapper>
   )
@@ -65,10 +65,19 @@ font-size: 0.9rem;
             h5{
                 color:  ${({theme})=>theme.colors.mediumBlack};
             }
-            p{
+            p{  
+                font-size: 1rem;
+                text-transform: capitalize;
                 margin: 0;
                 color:  ${({theme})=>theme.colors.green};
+                .clrBtn{
+                    width: 1.2rem;
+                    font-size: 0.7rem;
+                    border-radius: 50%;
+                    border: 0.1rem solid #7a7a7a;
+                }
             }
+            
         }
     }
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCartApiCall, getfromCartApiCall } from "../async-thunk-helper/cartThunkHelper";
+import { addToCartApiCall, getfromCartApiCall,deleteFromCartApiCall } from "../async-thunk-helper/cartThunkHelper";
 
 
 const CartSlice = createSlice({
@@ -39,6 +39,17 @@ const CartSlice = createSlice({
             }
         });
         builder.addCase(getfromCartApiCall.rejected, (state, action)=>{
+            state.isError = true;
+        });
+
+         // 📌
+        builder.addCase(deleteFromCartApiCall.pending, (state, action)=>{
+            state.isLoading = true;
+        });
+        builder.addCase(deleteFromCartApiCall.fulfilled, (state, action)=>{
+            state.isLoading = false
+        });
+        builder.addCase(deleteFromCartApiCall.rejected, (state, action)=>{
             state.isError = true;
         });
     }

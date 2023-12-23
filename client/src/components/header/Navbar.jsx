@@ -7,7 +7,8 @@ import { getUserApiCall } from '../../store/async-thunk-helper/asyncThunkHelper2
 import GetCookie from '../../hooks/getCookie'
 import {useDispatch, useSelector} from 'react-redux'
 import RemoveCookie from '../../hooks/removeCookie';
-import { logOutFunc } from '../../store/slices/importantSlice';
+import { logOutFunc, setAlertFunc, removeAlertFunc } from '../../store/slices/importantSlice';
+
 
 
 
@@ -35,6 +36,10 @@ const Navbar = () => {
     const onClickLogoutFunc = ()=>{
         dispatch(logOutFunc());
         RemoveCookie("paul-store-token");
+        dispatch(setAlertFunc({type: "success", message: "Loged Out Successfully"}));
+        setTimeout(() => {
+            dispatch(removeAlertFunc());
+        }, 3000);
     }
     
   return (

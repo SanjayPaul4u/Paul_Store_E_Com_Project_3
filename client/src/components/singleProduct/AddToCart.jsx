@@ -8,6 +8,7 @@ import { FaCheck } from "react-icons/fa6";
 import GetCookie from '../../hooks/getCookie';
 import { addToCartApiCall } from '../../store/async-thunk-helper/cartThunkHelper';
 import {useDispatch} from 'react-redux'
+import { removeAlertFunc, setAlertFunc } from '../../store/slices/importantSlice';
 
 
 
@@ -68,11 +69,19 @@ const AddToCart = ({singleProductData}) => {
   }, [singleProductData, Quantity, Color])
   
   // addToCartFunc 📌
-  const addToCartFunc = ()=>{
+  const addToCartFunc = async ()=>{
     if(GetCookie("paul-store-token")){
-      dispatch(addToCartApiCall({cartData}))
-      // console.log(cartData);
-      navigate("/cart");
+      const result = await dispatch(addToCartApiCall({cartData}))
+      if(result.payload.success){
+        navigate("/cart");
+        dispatch(setAlertFunc({type: "success", message :result.payload.message}));
+      }else{
+        dispatch(setAlertFunc({type: "error", message :result.payload.message}));
+      }
+      setTimeout(() => {
+        dispatch(removeAlertFunc());
+      }, 3000);
+
     }else{
       navigate("/login");
     }

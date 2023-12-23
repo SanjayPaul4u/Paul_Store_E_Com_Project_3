@@ -5,8 +5,9 @@ import PriceFormat from '../../helper/PriceFormat'
 import {Button} from '../../styles/Button'
 import {NavLink} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import { getfromCartApiCall } from '../../store/async-thunk-helper/cartThunkHelper'
+import { getfromCartApiCall, deleteFromCartApiCall } from '../../store/async-thunk-helper/cartThunkHelper'
 import GetCookie from '../../hooks/getCookie'
+import { removeAlertFunc, setAlertFunc } from '../../store/slices/importantSlice';
 
 
 
@@ -28,16 +29,37 @@ const MainCart = () => {
     return initialVal;
   },0);
 
+   // delete cart product
+   const deleteCartProductFunc = async(id)=>{
+    const result = await dispatch(deleteFromCartApiCall({id}));
+    if(result.payload.success){
+      dispatch(getfromCartApiCall());
+      dispatch(setAlertFunc({type: "success", message :result.payload.message}));
+    }else{
+      dispatch(setAlertFunc({type: "error", message :result.payload.message}));
+    }
+    setTimeout(() => {
+      dispatch(removeAlertFunc());
+    }, 3000);
+  }
+  // onClickOrderFunc
+  const onClickOrderFunc = () =>{
+    dispatch(setAlertFunc({type: "success", message :"Working on Order Functionality"}));
+    setTimeout(() => {
+      dispatch(removeAlertFunc());
+    }, 3000);
+  }
+
   // using useEffect
   useEffect(() => {
     if(GetCookie("paul-store-token")){
       dispatch(getfromCartApiCall());
     }
-  }, [])
-  
+  }, []);
+
+ 
   return (
     <Wrapper>
-      {isLoading && <h4>...isLoading</h4>}
       <div className="container main-cart">
         <div className="row sub-main-cart">
           <h4 className='cart-heading-text'>Your Shopping Cart</h4>
@@ -54,9 +76,12 @@ const MainCart = () => {
           {/* CART DATA DIV */}
           <div className="cart-data-div col-10 col-md-9 col-xl-9">
             {cartData.length > 0 && cartData.map((element)=>{
-              return <UserCartData key={element._id} data = {element} />
+              return <UserCartData key={element._id} data = {element} deleteCartProductFunc={deleteCartProductFunc}/>
             })}
            
+
+           {isLoading && <h4 className='text-center mt-4'>...Loading</h4>}
+           {!isLoading && cartData.length ===0 &&  <h4 className='text-center mt-4'>Your Cart is Empty</h4>}
            <NavLink to="/products" className="conti-shopping-btn">
                 <Button>Continue Shopping</Button>
             </NavLink>
@@ -82,7 +107,7 @@ const MainCart = () => {
               </div>
 
 
-              <div className="order-btn">
+              <div className="order-btn" onClick={onClickOrderFunc}>
                 <Button>Order Now</Button>
               </div>
 

@@ -46,3 +46,24 @@ export const getfromCartApiCall = createAsyncThunk("getfromCartApiCall", async()
         return error.response.data;
     }
 }); 
+
+// Delete Product from User Cart
+export const deleteFromCartApiCall = createAsyncThunk("deleteFromCartApiCall", async({id})=>{
+    try {
+        const token = GetCookie("paul-store-token");
+        const response = await axios({
+            method: "delete",
+            url: `${host}/api/cart/deletefromcart/${id}/${token}`,
+            headers: {
+                "Content-Type": "application/json" //important
+            }  
+        });
+
+        const data = await response.data;
+        return data;
+    } catch (error) {
+        console.log("deleteFromCartApiCall ERROR********");
+        console.log(error);
+        return error.response.data;
+    }
+}); 

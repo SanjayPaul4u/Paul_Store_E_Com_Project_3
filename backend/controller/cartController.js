@@ -90,7 +90,7 @@ const DeleteProductFromCart = async(req, res) =>{
     const deleted_cart_data = await Carts.findByIdAndDelete(cart_product_id, {new: true});
 
     success = true;
-    res.status(200).json({success, user_id, cart_product_id, deleted_cart_data});
+    res.status(200).json({success, message: "Removed Product successfully", deleted_cart_data});
   } catch (error) {
     let success = false;
     console.log("DeleteProductFromCart ERROR******");
