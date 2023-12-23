@@ -6,6 +6,9 @@ import CartAmountToggle from './CartAmountToggle';
 import {useNavigate} from 'react-router-dom'
 import { FaCheck } from "react-icons/fa6";
 import GetCookie from '../../hooks/getCookie';
+import { addToCartApiCall } from '../../store/async-thunk-helper/cartThunkHelper';
+import {useDispatch} from 'react-redux'
+
 
 
 
@@ -23,6 +26,9 @@ const AddToCart = ({singleProductData}) => {
     max_quantity: 0,
     image: []
   })
+
+  // using useDispatch
+  const dispatch = useDispatch();
 
   // using useNavigate
   const navigate = useNavigate();
@@ -54,14 +60,18 @@ const AddToCart = ({singleProductData}) => {
       quantity: Quantity, 
       price: price,
       max_quantity: stock,
-      image: [image[0]]
+      fileName :image[0].fileName,
+      filePath: image[0].filePath,
+      fileSize: image[0].fileSize,
+      fileType: image[0].fileType
     })}
   }, [singleProductData, Quantity, Color])
   
-  // addToCartFunc
+  // addToCartFunc 📌
   const addToCartFunc = ()=>{
     if(GetCookie("paul-store-token")){
-      console.log(cartData);
+      dispatch(addToCartApiCall({cartData}))
+      // console.log(cartData);
       navigate("/cart");
     }else{
       navigate("/login");

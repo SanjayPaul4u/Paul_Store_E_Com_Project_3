@@ -31,7 +31,7 @@ const cartSchema = new mongoose.Schema({
         type :Number,
         require : true
     },
-    image: [Object]  
+    image: Object  
 }, {timestamps: true});
 
 const Carts = new mongoose.model("cart", cartSchema);
