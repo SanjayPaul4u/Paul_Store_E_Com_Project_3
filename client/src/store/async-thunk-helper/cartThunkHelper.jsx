@@ -25,3 +25,24 @@ export const addToCartApiCall = createAsyncThunk("addToCartApiCall", async({cart
         return error.response.data;
     }
 }); 
+
+// getfromCartApiCall
+export const getfromCartApiCall = createAsyncThunk("getfromCartApiCall", async()=>{
+    try {
+        const token = GetCookie("paul-store-token");
+        const response = await axios({
+            method: "get",
+            url: `${host}/api/cart/getfromcart/${token}`,
+            headers: {
+                "Content-Type": "application/json" //important
+            }  
+        });
+
+        const data = await response.data;
+        return data;
+    } catch (error) {
+        console.log("addToCartApiCall ERROR********");
+        console.log(error);
+        return error.response.data;
+    }
+}); 

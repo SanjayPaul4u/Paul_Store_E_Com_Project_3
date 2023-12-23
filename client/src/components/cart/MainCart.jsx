@@ -1,14 +1,43 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import UserCartData from './UserCartData'
 import PriceFormat from '../../helper/PriceFormat'
 import {Button} from '../../styles/Button'
 import {NavLink} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
+import { getfromCartApiCall } from '../../store/async-thunk-helper/cartThunkHelper'
+import GetCookie from '../../hooks/getCookie'
+
+
 
 
 const MainCart = () => {
+  // using useDispatch
+  const dispatch = useDispatch();
+
+  // using useSelector
+  const main_cart_data = useSelector((state)=>{
+    return state.cart;
+  })
+  const { isLoading, cartData } = main_cart_data;
+
+  // total price 📌📌📌
+  const updatePriceValue = cartData.reduce((initialVal, curEle)=>{
+    initialVal = initialVal +(curEle.price * curEle.quantity);
+
+    return initialVal;
+  },0);
+
+  // using useEffect
+  useEffect(() => {
+    if(GetCookie("paul-store-token")){
+      dispatch(getfromCartApiCall());
+    }
+  }, [])
+  
   return (
     <Wrapper>
+      {isLoading && <h4>...isLoading</h4>}
       <div className="container main-cart">
         <div className="row sub-main-cart">
           <h4 className='cart-heading-text'>Your Shopping Cart</h4>
@@ -24,10 +53,10 @@ const MainCart = () => {
 
           {/* CART DATA DIV */}
           <div className="cart-data-div col-10 col-md-9 col-xl-9">
-           <UserCartData/>
-           <UserCartData/>
-           <UserCartData/>
-
+            {cartData.length > 0 && cartData.map((element)=>{
+              return <UserCartData key={element._id} data = {element} />
+            })}
+           
            <NavLink to="/products" className="conti-shopping-btn">
                 <Button>Continue Shopping</Button>
             </NavLink>
@@ -39,17 +68,17 @@ const MainCart = () => {
 
               <div>
                 <h6>Sub Total</h6>
-                <p><PriceFormat price={9000*100}/></p>
+                <p><PriceFormat price={updatePriceValue*100}/></p>
               </div>
 
               <div>
                 <h6>Shipping Fee (3%)</h6>
-                <p><PriceFormat price={(9000*0.03)*100}/></p> 
+                <p><PriceFormat price={(updatePriceValue*0.03)*100}/></p> 
               </div>
 
               <div className='order-total'>
                 <h6>Order Total</h6>
-                <p><PriceFormat price={9270*100}/></p> 
+                <p><PriceFormat price={((updatePriceValue*0.03) + updatePriceValue)*100}/></p> 
               </div>
 
 

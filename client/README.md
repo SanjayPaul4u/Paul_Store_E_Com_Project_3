@@ -118,6 +118,8 @@
 
 ## (31) FRONTEND:  Add To Cart Api Call Done
 
+## (32) FRONTEND:  Get From Cart Api Call Done  (+ Backend) 🔥
+
     
 
     

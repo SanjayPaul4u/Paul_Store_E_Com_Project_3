@@ -7,32 +7,35 @@ import { RiDeleteBack2Fill } from "react-icons/ri";
 
 
 
-const UserCartData = () => {
+const UserCartData = ({data}) => {
+    const {name, color, weight, quantity, price, max_quantity, image} = data;
+
+    
   return (
     <Wrapper className="user-cart-item row">
 
         <div className='product-data col-md-5 col-xl-5'>
             <div className='product-img'>
-                <img src={Img1} alt="img-error" className='card-img-top'/>
+                <img src={`data:${image.fileType};base64,${image.imagebase64}`} alt="img-error" className='card-img-top'/>
             </div>
 
             <div className="product-details">
-                <h5>Saccharing</h5>
+                <h5>{name}</h5>
                 <p>color</p>
-                <p>1 kg </p>
+                <p>{weight}</p>
             </div>
         </div>
 
         <div className="product-price col-md-2 col-xl-2">
-            <p><PriceFormat price={1500*100}/></p>
+            <p><PriceFormat price={price*100}/></p>
         </div>
 
         <div className="product-quantity col-md-2 col-xl-2">
-            <p>2</p>
+            <p>{quantity}</p>
         </div>
 
         <div className="product-total-price col-md-2 col-xl-2">
-            <p><PriceFormat price={3000*100}/></p>
+            <p><PriceFormat price={(price*quantity)*100}/></p>
         </div>
 
         <div className="delete-item col-md-1 col-xl-1">
