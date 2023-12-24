@@ -122,6 +122,8 @@
 
 ## (33) FRONTEND: If Product already exist in cart then quantity Update  (+ Backend) 🔥
 
+## (34) FRONTEND: Update Product Quantity By id in cart || api call done  (+ Backend) 🔥🔥🔥
+
     
 
     

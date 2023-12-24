@@ -1,5 +1,5 @@
 const express = require("express");
-const { addToCartFunc, getFromUserCartFunc, DeleteProductFromCart } = require("../controller/cartController");
+const { addToCartFunc, getFromUserCartFunc, DeleteProductFromCart, updateProductQuantityById } = require("../controller/cartController");
 const fetchUser = require("../middleware/fetchUser");
 
 
@@ -14,5 +14,8 @@ router.get("/getfromcart/:token", fetchUser, getFromUserCartFunc);
 
 // ROUTE 3: Delete From Cart: /api/cart/getfromcart
 router.delete("/deletefromcart/:id/:token", fetchUser, DeleteProductFromCart);
+
+// ROUTE 3: Delete From Cart: /api/cart/getfromcart
+router.patch("/updatequantity/:id/:token", fetchUser, updateProductQuantityById);
 
 module.exports = router;

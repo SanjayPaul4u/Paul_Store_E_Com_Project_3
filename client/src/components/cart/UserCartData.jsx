@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Img1 from '/img2.png'
 import styled from 'styled-components'
 import PriceFormat from '../../helper/PriceFormat'
 import { RiDeleteBack2Fill } from "react-icons/ri";
+import CartAmountToggle from '../singleProduct/CartAmountToggle'
+import { incrementQuantity, decrementQuantity } from '../../store/slices/CartSlice';
+import {useDispatch} from 'react-redux'
+import { updateQuantityApiCall } from '../../store/async-thunk-helper/cartThunkHelper';
+
+
 
 
 
@@ -10,6 +16,21 @@ import { RiDeleteBack2Fill } from "react-icons/ri";
 const UserCartData = ({data, deleteCartProductFunc}) => {
     const {name, color, weight, quantity, price, max_quantity, image, _id} = data;
 
+    // using useDispatch
+    const dispatch = useDispatch();
+
+    // INCREMENT, DECREMENT FUNCTION 📌
+    const IncrementFunc = ()=>{
+        dispatch(incrementQuantity({_id}));
+    }
+    const DecrementFunc = ()=>{
+        dispatch(decrementQuantity({_id}));
+    }
+    // useEffect
+    useEffect(() => {
+        dispatch(updateQuantityApiCall({_id, quantity}))
+    }, [quantity])
+    
     
   return (
     <Wrapper className="user-cart-item row">
@@ -31,7 +52,13 @@ const UserCartData = ({data, deleteCartProductFunc}) => {
         </div>
 
         <div className="product-quantity col-md-2 col-xl-2">
-            <p>{quantity}</p>
+             {/* quantity, Increment, Decrement */}
+            {/* <p>{quantity}</p> */}
+            <CartAmountToggle 
+            quantity={quantity}
+            Increment = {IncrementFunc}
+            Decrement = {DecrementFunc}
+            />
         </div>
 
         <div className="product-total-price col-md-2 col-xl-2">

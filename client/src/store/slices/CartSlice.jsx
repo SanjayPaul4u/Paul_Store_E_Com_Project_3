@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCartApiCall, getfromCartApiCall,deleteFromCartApiCall } from "../async-thunk-helper/cartThunkHelper";
+import { addToCartApiCall, getfromCartApiCall,deleteFromCartApiCall, updateQuantityApiCall } from "../async-thunk-helper/cartThunkHelper";
 
 
 const CartSlice = createSlice({
@@ -9,9 +9,56 @@ const CartSlice = createSlice({
         isError: false,
         cartData: []
     },
-    // reducers:{
-    //     addToCart (state, action){}
-    // }
+    reducers:{
+        incrementQuantity (state, action){
+            const pro_id = action.payload._id;
+            const updateProductCart = state.cartData.map((curEle)=>{
+                if(pro_id === curEle._id){
+                    let incrementQuantity = curEle.quantity + 1;
+                    if(incrementQuantity>curEle.max_quantity){
+                        incrementQuantity = curEle.max_quantity;
+                    }
+                    return {
+                        ...curEle,
+                        quantity : incrementQuantity
+    
+                    }
+                }else{
+                    return curEle;
+                }
+            });
+
+            return {
+                ...state,
+                cartData: updateProductCart
+
+            }
+        },
+        decrementQuantity (state, action){
+            const pro_id = action.payload._id;
+            const updateProductCart = state.cartData.map((curEle)=>{
+                if(pro_id === curEle._id){
+                    let decQuantity = curEle.quantity - 1;
+                    if(decQuantity <= 1 ){
+                        decQuantity = 1;
+                    }
+                    return {
+                        ...curEle,
+                        quantity : decQuantity
+    
+                    }
+                }else{
+                    return curEle;
+                }
+            });
+
+            return {
+                ...state,
+                cartData: updateProductCart
+
+            }
+        }
+    },
     extraReducers: (builder)=>{
         // 📌
         builder.addCase(addToCartApiCall.pending, (state, action)=>{
@@ -52,8 +99,20 @@ const CartSlice = createSlice({
         builder.addCase(deleteFromCartApiCall.rejected, (state, action)=>{
             state.isError = true;
         });
+
+         // 📌
+        builder.addCase(updateQuantityApiCall.pending, (state, action)=>{
+            // state.isLoading = true;
+        });
+        builder.addCase(updateQuantityApiCall.fulfilled, (state, action)=>{
+            state.isLoading = false
+        });
+        builder.addCase(updateQuantityApiCall.rejected, (state, action)=>{
+            state.isError = true;
+        });
     }
 
 })
 
 export default CartSlice.reducer
+export const {incrementQuantity, decrementQuantity} = CartSlice.actions;

@@ -67,3 +67,25 @@ export const deleteFromCartApiCall = createAsyncThunk("deleteFromCartApiCall", a
         return error.response.data;
     }
 }); 
+
+// update product quantity by id api call
+export const updateQuantityApiCall = createAsyncThunk("updateQuantityApiCall", async({_id, quantity})=>{
+    try {
+        const token = GetCookie("paul-store-token");
+        const response = await axios({
+            method: "patch",
+            url: `${host}/api/cart/updatequantity/${_id}/${token}`,
+            data: {quantity: quantity},
+            headers: {
+                "Content-Type": "application/json" //important
+            }  
+        });
+
+        const data = await response.data;
+        return data;
+    } catch (error) {
+        console.log("updateQuantityApiCall ERROR********");
+        console.log(error);
+        return error.response.data;
+    }
+}); 

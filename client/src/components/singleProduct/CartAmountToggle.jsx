@@ -30,7 +30,8 @@ const Wrapper = styled.div`
             display: flex;
             button{
                 border: none;
-                background-color: ${({theme})=> theme.colors.mainBg};
+                border-radius: 25%;
+                background-color: transparent;
                 color: ${({theme})=> theme.colors.lowBlack};
                 &:hover{
                     color: ${({theme})=> theme.colors.black};

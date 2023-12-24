@@ -10,7 +10,7 @@ const addToCartFunc = async (req, res) => {
 
     // Check Product Exist or not📌📌📌
     const existProduct = await Carts.findOne({user_id: _id, name, color, weight, price});
-    console.log(existProduct);
+    // console.log(existProduct);
 
     if(existProduct){
       let totalQuantity = existProduct.quantity+quantity;
@@ -118,4 +118,40 @@ const DeleteProductFromCart = async(req, res) =>{
   }
 }
 
-module.exports = {addToCartFunc, getFromUserCartFunc, DeleteProductFromCart};
+// UPDATE PRODUCT QUANTITY BY ID
+const updateProductQuantityById = async (req, res)=>{
+  try {
+    let success = false;
+    const user_id = req.user._id;
+    const cart_product_id = req.params.id;
+    const {quantity} = req.body;
+    const cart_data  = await Carts.findOne({_id: cart_product_id});
+
+    // IF CART DATA NOT FOUND
+    if(!cart_data){
+      success = false;
+      return res.status(404).json({success, message:"Not Found"});
+    }
+
+    // CART DATA'S USER OR MAIN USER NOT SAME
+    if(cart_data.user_id.toString() !== user_id.toString()){
+      success = false;
+      return res.status(401).json({success, message:"Not Allowd"});
+    }
+
+    // FINALLY UPDATE
+    const updateProduct = await Carts.findByIdAndUpdate(cart_product_id, {$set: {quantity:quantity}}, {new: true});
+    saved_update_data = await updateProduct.save();
+
+    success = true;
+    return res.status(201).json({success, message:"Product Quantity updated from Cart successfully", saved_update_data});
+    
+  } catch (error) {
+    let success = false;
+    console.log("updateProductQuantityById ERROR******");
+    console.log(error);
+    res.status(500).json({ success, message: error.message });
+  }
+}
+
+module.exports = {addToCartFunc, getFromUserCartFunc, DeleteProductFromCart, updateProductQuantityById};
