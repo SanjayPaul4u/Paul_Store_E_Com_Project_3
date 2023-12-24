@@ -22,7 +22,11 @@ const Navbar = () => {
     const main_importants_data = useSelector((state)=>{
         return state.importants;
     });
+    const main_cart_data = useSelector((state)=>{
+        return state.cart;
+    });
     const { isLoading, user } = main_importants_data;
+    const { cartData } = main_cart_data;
     // console.log(main_importants_data);
     
     // using useEffect
@@ -66,8 +70,14 @@ const Navbar = () => {
 
 
                 <li className="nav-item">
-                <NavLink
-                className="nav-link nav-link-hover" aria-current="page" to="/cart"><FaShoppingCart className='iconStyle'/></NavLink>
+                <NavLink className="nav-link nav-link-hover position-relative" aria-current="page" to="/cart">
+                    <FaShoppingCart className='iconStyle'/>
+                    <span className="mt-2 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    style={{fontFamily:"sans-serif"}}
+                    >
+                        {cartData && cartData.length}
+                    </span>
+                </NavLink>
                 </li>   
 
                 <li className="nav-item">

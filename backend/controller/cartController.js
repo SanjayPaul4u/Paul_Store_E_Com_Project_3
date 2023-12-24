@@ -11,8 +11,9 @@ const addToCartFunc = async (req, res) => {
     // Check Product Exist or not📌📌📌
     const existProduct = await Carts.findOne({user_id: _id, name, color, weight, price});
     // console.log(existProduct);
-
+    let saved_cart_data;
     if(existProduct){
+      // console.log(quantity);
       let totalQuantity = existProduct.quantity+quantity;
       if(totalQuantity>max_quantity){
         totalQuantity = max_quantity;
@@ -22,6 +23,7 @@ const addToCartFunc = async (req, res) => {
       saved_cart_data = await updateProduct.save();
 
       success = true;
+      // console.log(updateProduct.quantity);
       return res.status(201).json({success, message:"Product added to cart successfully(updated)", saved_cart_data});
     }
 

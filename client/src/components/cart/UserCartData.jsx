@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Img1 from '/img2.png'
 import styled from 'styled-components'
 import PriceFormat from '../../helper/PriceFormat'
@@ -20,7 +20,7 @@ const UserCartData = ({data, deleteCartProductFunc}) => {
     const dispatch = useDispatch();
 
     // INCREMENT, DECREMENT FUNCTION 📌
-    const IncrementFunc = ()=>{
+    const IncrementFunc = async ()=>{
         dispatch(incrementQuantity({_id}));
     }
     const DecrementFunc = ()=>{
@@ -28,8 +28,8 @@ const UserCartData = ({data, deleteCartProductFunc}) => {
     }
     // useEffect
     useEffect(() => {
-        dispatch(updateQuantityApiCall({_id, quantity}))
-    }, [quantity])
+        // dispatch(updateQuantityApiCall({_id, quantity}))
+    }, [IncrementFunc, DecrementFunc])
     
     
   return (

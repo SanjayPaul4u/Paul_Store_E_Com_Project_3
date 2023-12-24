@@ -47,11 +47,17 @@ const AddToCart = ({singleProductData}) => {
   const onclickColor = (color) =>{
     setColor(color);
   }
-  // useEffect
+  // useEffect 1
   useEffect(() => {
-    if(colors && colors.length>0 && Color===""){
+    if(colors && colors.length>0){
       setColor(colors[0]);
+    }else{
+      setColor("");
     }
+  }, [colors])
+  
+   // useEffect 2
+  useEffect(() => {
     if(image){
     setCartData({
       product_id: product_id,
@@ -78,14 +84,17 @@ const AddToCart = ({singleProductData}) => {
       }else{
         dispatch(setAlertFunc({type: "error", message :result.payload.message}));
       }
+      
       setTimeout(() => {
         dispatch(removeAlertFunc());
+
       }, 3000);
 
     }else{
       navigate("/login");
     }
   }
+ 
   // console.log(Color);
   return (
     <Wrapper>
