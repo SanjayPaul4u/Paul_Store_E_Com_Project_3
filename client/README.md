@@ -120,6 +120,8 @@
 
 ## (32) FRONTEND:  Get From Cart Api Call Done  (+ Backend) 🔥
 
+## (33) FRONTEND: If Product already exist in cart then quantity Update  (+ Backend) 🔥
+
     
 
     

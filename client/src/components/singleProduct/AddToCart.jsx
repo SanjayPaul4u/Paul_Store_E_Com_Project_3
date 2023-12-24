@@ -36,7 +36,7 @@ const AddToCart = ({singleProductData}) => {
   
   // IncrementFunc
   const IncrementFunc = ()=>{
-    Quantity < 10 ?  setQuantity(Quantity + 1): Quantity;
+    Quantity < stock ?  setQuantity(Quantity + 1): Quantity;
     
   }
   // DecrementFunc

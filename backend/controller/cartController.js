@@ -8,6 +8,25 @@ const addToCartFunc = async (req, res) => {
     const _id = req.user._id;
     const { product_id, name, color, weight, quantity, price, max_quantity, image, fileName, filePath, fileSize, fileType } = req.body;
 
+    // Check Product Exist or not📌📌📌
+    const existProduct = await Carts.findOne({user_id: _id, name, color, weight, price});
+    console.log(existProduct);
+
+    if(existProduct){
+      let totalQuantity = existProduct.quantity+quantity;
+      if(totalQuantity>max_quantity){
+        totalQuantity = max_quantity;
+      }
+
+      const updateProduct = await Carts.findByIdAndUpdate(existProduct._id, {$set: {quantity: totalQuantity}}, {new: true});
+      saved_cart_data = await updateProduct.save();
+
+      success = true;
+      return res.status(201).json({success, message:"Product added to cart successfully(updated)", saved_cart_data});
+    }
+
+
+    // Image Obj Create
     const imageBase64 = fs.readFileSync(filePath);
     const finalImageBase64 = imageBase64.toString("base64");
     let imgObj = {
@@ -31,7 +50,7 @@ const addToCartFunc = async (req, res) => {
         image: imgObj
     });
 
-    const saved_cart_data = await cart_data.save();
+    saved_cart_data = await cart_data.save();
     
     success = true;
     res.status(201).json({success, message:"Product added to cart successfully", saved_cart_data});
