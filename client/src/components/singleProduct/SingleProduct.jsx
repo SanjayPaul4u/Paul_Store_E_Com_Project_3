@@ -21,17 +21,18 @@ const SingleProduct = () => {
   const main_products_data = useSelector((state)=>{
     return state.products;
   });
-  const {singleProductData} = main_products_data;
+  const {singleProductData, isLoading} = main_products_data;
 
 
   return (
     <Wrapper>
+      {isLoading && <h4 className='text-center mt-4'>...Loading</h4>}
+      <>
       <div className="header">
         <div className='container header-div'>
           <h6>Product Id: <strong>{id}</strong></h6>          
         </div>
       </div>
-
       <div className='single-main-product'>
         <div className='container'>       
         <div className="row single-product-body">
@@ -44,6 +45,7 @@ const SingleProduct = () => {
         </div>
         </div>
       </div>
+      </>
     </Wrapper>
   )
 }

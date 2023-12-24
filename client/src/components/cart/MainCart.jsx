@@ -60,7 +60,10 @@ const MainCart = () => {
  
   return (
     <Wrapper>
-      <div className="container main-cart">
+      {isLoading && <h4 className='text-center mt-4'>...Loading</h4>}
+      {!isLoading && cartData.length ===0 &&  <h2 className='text-center mt-4'>Your Cart is Empty</h2>}
+      
+      {cartData.length !==0 && <div className="container main-cart">
         <div className="row sub-main-cart">
           <h4 className='cart-heading-text'>Your Shopping Cart</h4>
           <div className='item-rows col-10 col-md-9 col-xl-9'>
@@ -78,13 +81,11 @@ const MainCart = () => {
             {cartData.length > 0 && cartData.map((element)=>{
               return <UserCartData key={element._id} data = {element} deleteCartProductFunc={deleteCartProductFunc}/>
             })}
-           
-
-           {isLoading && <h4 className='text-center mt-4'>...Loading</h4>}
-           {!isLoading && cartData.length ===0 &&  <h4 className='text-center mt-4'>Your Cart is Empty</h4>}
-           <NavLink to="/products" className="conti-shopping-btn">
-                <Button>Continue Shopping</Button>
-            </NavLink>
+            <div className="conti-shopping-btn">
+                <NavLink to="/products">
+                  <Button>Continue Shopping</Button>
+                </NavLink>
+            </div>
           </div>
 
           {/* ORDER DIV */}
@@ -107,8 +108,8 @@ const MainCart = () => {
               </div>
 
 
-              <div className="order-btn" onClick={onClickOrderFunc}>
-                <Button>Order Now</Button>
+              <div className="order-btn">
+                <Button onClick={onClickOrderFunc}>Order Now</Button>
               </div>
 
             </div>
@@ -116,7 +117,7 @@ const MainCart = () => {
 
 
         </div>
-      </div>
+      </div>}
     </Wrapper>
   )
 }
