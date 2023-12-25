@@ -81,6 +81,8 @@ const MainCart = () => {
             {cartData.length > 0 && cartData.map((element)=>{
               return <UserCartData key={element._id} data = {element} deleteCartProductFunc={deleteCartProductFunc}/>
             })}
+
+  
             <div className="conti-shopping-btn">
                 <NavLink to="/products">
                   <Button>Continue Shopping</Button>

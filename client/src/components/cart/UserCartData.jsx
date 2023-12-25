@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef } from 'react'
 import Img1 from '/img2.png'
 import styled from 'styled-components'
 import PriceFormat from '../../helper/PriceFormat'
@@ -15,25 +15,32 @@ import { updateQuantityApiCall } from '../../store/async-thunk-helper/cartThunkH
 
 const UserCartData = ({data, deleteCartProductFunc}) => {
     const {name, color, weight, quantity, price, max_quantity, image, _id} = data;
+    // using useRef
+    const saveRef = useRef();
 
     // using useDispatch
     const dispatch = useDispatch();
 
     // INCREMENT, DECREMENT FUNCTION 📌
     const IncrementFunc = async ()=>{
-        dispatch(incrementQuantity({_id}));
+        const result  = await dispatch(incrementQuantity({_id}));
+        if(result.payload._id){
+            saveRef.current.click();
+        }
     }
-    const DecrementFunc = ()=>{
-        dispatch(decrementQuantity({_id}));
+    const DecrementFunc = async()=>{
+        const result  = await dispatch(decrementQuantity({_id}));
+        if(result.payload._id){
+            saveRef.current.click();
+        }
     }
-    // useEffect
-    useEffect(() => {
-        // dispatch(updateQuantityApiCall({_id, quantity}))
-    }, [IncrementFunc, DecrementFunc])
     
-    
+    const onClickSaveFunc = ()=>{
+        dispatch(updateQuantityApiCall({_id, quantity}));
+    }
   return (
     <Wrapper className="user-cart-item row">
+        <button className="btn btn-sm btn-danger d-none" ref={saveRef} onClick={onClickSaveFunc}>save</button>
 
         <div className='product-data col-md-5 col-xl-5'>
             <div className='product-img'>
