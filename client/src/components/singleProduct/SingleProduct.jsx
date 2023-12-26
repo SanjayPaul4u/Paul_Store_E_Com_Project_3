@@ -5,6 +5,7 @@ import SingleImage from './SingleImage'
 import SingleData from './SingleData'
 import { fetchSingleProduct } from '../../store/async-thunk-helper/asyncThunkHelper'
 import {useDispatch, useSelector} from 'react-redux'
+import Spinner from '../Spinner'
 
 
 
@@ -14,6 +15,7 @@ const SingleProduct = () => {
 
   // Use Effect 📌
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(fetchSingleProduct({id}));
   }, []);
  
@@ -26,8 +28,8 @@ const SingleProduct = () => {
 
   return (
     <Wrapper>
-      {isLoading && <h4 className='text-center mt-4'>...Loading</h4>}
-      <>
+      {isLoading && <div className='mt-4'><Spinner/></div>}
+      {!isLoading && <>
       <div className="header">
         <div className='container header-div'>
           <h6>Product Id: <strong>{id}</strong></h6>          
@@ -45,7 +47,7 @@ const SingleProduct = () => {
         </div>
         </div>
       </div>
-      </>
+      </>}
     </Wrapper>
   )
 }

@@ -6,6 +6,7 @@ import {
   fetchMoreProducts,
 } from "../../store/async-thunk-helper/asyncThunkHelper";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Spinner from '../Spinner'
 
 const GridView = ({main_products_data}) => {
   const { productsData, isLoading, totalResult, contentSize, page } = main_products_data;
@@ -21,7 +22,7 @@ const GridView = ({main_products_data}) => {
   return (
     <>
       <Wrapper className="gird-view">
-      {isLoading ? <h4>...Loading</h4>: totalResult===0 && <h5>No product available with this filter</h5>}
+      {isLoading ? <Spinner/>: totalResult===0 && <h5>No product available with this filter</h5>}
 
         {/* INFINITE SCROLLIN 📌 */}
         <InfiniteScroll
@@ -31,7 +32,7 @@ const GridView = ({main_products_data}) => {
             productsData.length !== totalResult &&
             productsData.length < totalResult
           }
-          loader={<h3>...Loadinga</h3>}
+          loader={<Spinner/>}
           className="row"
         >
           {/* MAPPING ALL PRODUCT 📌 */}

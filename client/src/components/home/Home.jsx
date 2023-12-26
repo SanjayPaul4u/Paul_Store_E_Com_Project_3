@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { BsCake } from "react-icons/bs";
 import { IoIceCreamOutline } from "react-icons/io5";
@@ -9,6 +9,10 @@ import Features from './Features';
 
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+  
   return (
     <Wrapper className='container'>
         <div className="main-home-div">

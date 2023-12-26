@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { getfromCartApiCall, deleteFromCartApiCall } from '../../store/async-thunk-helper/cartThunkHelper'
 import GetCookie from '../../hooks/getCookie'
 import { removeAlertFunc, setAlertFunc } from '../../store/slices/importantSlice';
+import Spinner from '../Spinner'
 
 
 
@@ -52,6 +53,7 @@ const MainCart = () => {
 
   // using useEffect
   useEffect(() => {
+    window.scrollTo(0 ,0);
     if(GetCookie("paul-store-token")){
       dispatch(getfromCartApiCall());
     }
@@ -60,8 +62,8 @@ const MainCart = () => {
  
   return (
     <Wrapper>
-      {isLoading && <h4 className='text-center mt-4'>...Loading</h4>}
-      {!isLoading && cartData.length ===0 &&  <h2 className='text-center mt-4'>Your Cart is Empty</h2>}
+      {isLoading && <div className="mt-4">< Spinner/></div>}
+      {!isLoading && cartData.length ===0 &&  <h4 className='empty-text text-center mt-4'>Your Cart is Empty</h4>}
       
       {cartData.length !==0 && <div className="container main-cart">
         <div className="row sub-main-cart">
@@ -127,6 +129,11 @@ const Wrapper = styled.div`
 height: 100vh;
 padding-top: 4rem;
 background-color: ${({theme})=> theme.colors.mainBg};
+
+  .empty-text{
+    color: ${({theme})=> theme.colors.mediumBlack};
+    font-family: ${({theme})=> theme.fonts.font2};
+  }
 
   .main-cart{
     min-height: 100%;

@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addToCartApiCall, getfromCartApiCall,deleteFromCartApiCall, updateQuantityApiCall } from "../async-thunk-helper/cartThunkHelper";
+import { LogOutFunc } from "../actions";
+
 
 
 const CartSlice = createSlice({
@@ -110,6 +112,14 @@ const CartSlice = createSlice({
         builder.addCase(updateQuantityApiCall.rejected, (state, action)=>{
             state.isError = true;
         });
+
+        // 📌LOG-OUT-FUNC
+        builder.addCase(LogOutFunc, (state, action)=>{
+            return {
+                ...state,
+                cartData : []
+            }
+        })
     }
 
 })

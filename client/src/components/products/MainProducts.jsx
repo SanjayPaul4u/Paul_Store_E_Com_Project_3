@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import ProductPageHeader from './ProductPageHeader'
 import ProductPageBody from './ProductPageBody'
@@ -6,6 +6,10 @@ import ProductPageBody from './ProductPageBody'
 
 
 const MainProducts = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+  
   return (
     <Wrapper className='main-product'>
         <ProductPageHeader/>

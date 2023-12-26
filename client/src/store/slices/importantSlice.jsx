@@ -1,12 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { LoingApiCall, SignupApiCall, getUserApiCall } from '../async-thunk-helper/asyncThunkHelper2';
+import { LogOutFunc } from '../actions';
+
+
 
 
 
 const importantSlice = createSlice({
     name: "user",
     initialState: {
-        gridView : true,
+        gridView : false,
         isLoading : false,
         isError: false,
         user: [],
@@ -25,9 +28,9 @@ const importantSlice = createSlice({
         removeAlertFunc(state, action){
             state.Alert = null;
         },
-        logOutFunc(state, action){
-            state.user = [];
-        }
+        // logOutFunc(state, action){
+        //     state.user = [];
+        // }
     },
     extraReducers: (builder) =>{
         //getUserApiCall 📌
@@ -84,6 +87,13 @@ const importantSlice = createSlice({
         builder.addCase(SignupApiCall.rejected, (state, action)=>{
             state.isError  = true;
         });
+        // LogOutFunc 📌
+        builder.addCase(LogOutFunc, (state, action)=>{
+            return {
+                ...state,
+                user : []
+            }
+        })
     }
 
 })

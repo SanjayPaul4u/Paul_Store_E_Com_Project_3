@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { SlLocationPin } from "react-icons/sl";
 import { CiMobile3 } from "react-icons/ci";
@@ -9,6 +9,10 @@ import { MdOutlineEmail } from "react-icons/md";
 
 
 const MainContact = () => {
+    useEffect(() => {
+      window.scrollTo(0 ,0);
+    }, [])
+    
   return (
     <Wrapper>
         <div className="container main-contact">

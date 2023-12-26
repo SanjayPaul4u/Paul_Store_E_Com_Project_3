@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
@@ -7,18 +7,22 @@ import { getUserApiCall } from '../../store/async-thunk-helper/asyncThunkHelper2
 import GetCookie from '../../hooks/getCookie'
 import {useDispatch, useSelector} from 'react-redux'
 import RemoveCookie from '../../hooks/removeCookie';
-import { logOutFunc, setAlertFunc, removeAlertFunc } from '../../store/slices/importantSlice';
-
+import { setAlertFunc, removeAlertFunc } from '../../store/slices/importantSlice';
+import { getfromCartApiCall } from '../../store/async-thunk-helper/cartThunkHelper';
+import { LogOutFunc } from '../../store/actions';
 
 
 
 
 
 const Navbar = () => {
-    // using useDispatch
+    // USING USE-NAVIGATE
+    const navigate = useNavigate();
+
+    // 📌 USING USE-DISPATCH 
     const dispatch = useDispatch();
 
-    // using useSelector
+    // 📌 USING USE-SELECTOR
     const main_importants_data = useSelector((state)=>{
         return state.importants;
     });
@@ -29,23 +33,25 @@ const Navbar = () => {
     const { cartData } = main_cart_data;
     // console.log(main_importants_data);
     
-    // using useEffect
+    // 📌 USING USE-EFFECT
     useEffect(() => {
         if(GetCookie("paul-store-token")){
             dispatch(getUserApiCall());
+            dispatch(getfromCartApiCall());
         }
     }, [GetCookie("paul-store-token")]);
     
-    // ON CLICK LOG OUT FUNCTION
+    
+    // 📌 ON CLICK LOG OUT FUNCTION
     const onClickLogoutFunc = ()=>{
-        dispatch(logOutFunc());
+        dispatch(LogOutFunc());
         RemoveCookie("paul-store-token");
         dispatch(setAlertFunc({type: "success", message: "Loged Out Successfully"}));
         setTimeout(() => {
             dispatch(removeAlertFunc());
         }, 3000);
     }
-    
+
   return (
     <Wrapper className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
@@ -75,13 +81,13 @@ const Navbar = () => {
                     <span className="mt-2 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                     style={{fontFamily:"sans-serif"}}
                     >
-                        {cartData && cartData.length}
+                        {GetCookie("paul-store-token")?cartData.length:0}
                     </span>
                 </NavLink>
                 </li>   
 
                 <li className="nav-item">
-                <NavLink className="nav-link" id='user' aria-current="page" to="/" style={{marginRight: "-0.5rem"}}>
+                <NavLink className="nav-link mx-2" id='user' aria-current="page" to="/">
                     {isLoading ? "..loading " :user && user.email? user.email: <FaRegUserCircle className='iconStyle'/>}
                 </NavLink>
                 </li>    
@@ -97,7 +103,7 @@ const Navbar = () => {
                 <NavLink className="nav-link nav-link-hover" aria-current="page" to="/signup">SignUp</NavLink>
                 </li>  
                 </>:
-                <button className="btn btn-sm btn-danger ms-2" onClick={onClickLogoutFunc}>LogOut</button>
+                <button className="btn btn-sm btn-danger" onClick={onClickLogoutFunc}>LogOut</button>
                 } 
                 {/* 📌*/}           
             </ul>

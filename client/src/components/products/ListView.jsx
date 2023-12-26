@@ -6,6 +6,8 @@ import { FaStar } from "react-icons/fa6";
 import { fetchMoreProducts } from "../../store/async-thunk-helper/asyncThunkHelper";
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useDispatch } from "react-redux";
+import Spinner from "../Spinner";
+
 
 
 const ListView = ({main_products_data}) => {
@@ -22,7 +24,7 @@ const fetchMoreFunc = () => {
 
   return (
     <Wrapper className="gird-view">
-      {isLoading ? <h4>...Loading</h4>: totalResult===0 && <h5>No product available with this filter</h5>}
+      {isLoading ? <Spinner/>: totalResult===0 && <h5>No product available with this filter</h5>}
 
       {/* INFINITE SCROLLIN 📌 */}
       <InfiniteScroll
@@ -32,7 +34,7 @@ const fetchMoreFunc = () => {
             productsData.length !== totalResult &&
             productsData.length < totalResult
           }
-          loader={<h3>...Loadinga</h3>}
+          loader={<Spinner/>}
           className="row"
         >
 

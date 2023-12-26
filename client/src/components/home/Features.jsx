@@ -5,6 +5,7 @@ import { fetchProducts } from '../../store/async-thunk-helper/asyncThunkHelper'
 import OurProduct from '../products/OurProduct'
 import {Button} from '../../styles/Button'
 import { NavLink } from 'react-router-dom'
+import Spinner from '../Spinner'
 
 
 
@@ -27,8 +28,8 @@ const Features = () => {
 
   return (
     <Wrapper>
-        {isLoading && <h4>...Loading</h4>}
         <h3>Features Product</h3>
+        {isLoading && <Spinner/>}
         <div className="row">
             {
               productsData.map((element, index) =>{
