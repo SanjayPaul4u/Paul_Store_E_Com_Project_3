@@ -5,7 +5,6 @@ import GetCookie from '../../hooks/getCookie';
 
 const host = "http://localhost:7000";
 
-
 export const getUserApiCall = createAsyncThunk("getUserApiCall", async()=>{
     try {
         const token = GetCookie("paul-store-token");

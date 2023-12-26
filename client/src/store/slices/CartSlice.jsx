@@ -9,7 +9,8 @@ const CartSlice = createSlice({
     initialState: {
         isLoading: false,
         isError: false,
-        cartData: []
+        cartData: [],
+        cart_progress: 0
     },
     reducers:{
         incrementQuantity (state, action){
@@ -65,20 +66,26 @@ const CartSlice = createSlice({
         // 📌
         builder.addCase(addToCartApiCall.pending, (state, action)=>{
             state.isLoading = true;
+            state.cart_progress = 30;
         });
         builder.addCase(addToCartApiCall.fulfilled, (state, action)=>{
+            state.cart_progress = 50;
             state.isLoading = false;
+            state.cart_progress = 100;
             // console.log(action.payload);
         });
         builder.addCase(addToCartApiCall.rejected, (state, action)=>{
             state.isError = true;
+            state.cart_progress = 100;
         });
 
          // 📌
         builder.addCase(getfromCartApiCall.pending, (state, action)=>{
+            state.cart_progress = 30;
             state.isLoading = true;
         });
         builder.addCase(getfromCartApiCall.fulfilled, (state, action)=>{
+            state.cart_progress = 50;
             state.isLoading = false;
             const { success, cart_data } = action.payload;
             if(success){
@@ -86,19 +93,26 @@ const CartSlice = createSlice({
             }else{
                 console.log(action.payload);
             }
+            state.cart_progress = 100;
         });
         builder.addCase(getfromCartApiCall.rejected, (state, action)=>{
             state.isError = true;
+            state.cart_progress = 100;
         });
 
          // 📌
         builder.addCase(deleteFromCartApiCall.pending, (state, action)=>{
+            state.cart_progress = 30;
             state.isLoading = true;
+            
         });
         builder.addCase(deleteFromCartApiCall.fulfilled, (state, action)=>{
+            state.cart_progress = 50;
             state.isLoading = false
+            state.cart_progress = 100;
         });
         builder.addCase(deleteFromCartApiCall.rejected, (state, action)=>{
+            state.cart_progress = 100;
             state.isError = true;
         });
 

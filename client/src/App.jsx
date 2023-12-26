@@ -12,6 +12,8 @@ import Signup from './components/Signup'
 import MainContact from './components/contact/MainContact'
 import Footer from './components/Footer'
 import MainAlert from './components/alert-comp/MainAlert'
+import TopLoadingBar from './components/TopLoadingBar'
+
 
 
 
@@ -40,6 +42,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <GlobalStyle/>
+        <TopLoadingBar/>
         <Header/>
         <MainAlert/>
         <Routes>          

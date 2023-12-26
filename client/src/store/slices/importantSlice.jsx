@@ -14,6 +14,7 @@ const importantSlice = createSlice({
         isError: false,
         user: [],
         Alert: null,
+        important_progress: 0
     },
     reducers :{
         girdViewFunc(state, action){
@@ -27,17 +28,16 @@ const importantSlice = createSlice({
         },
         removeAlertFunc(state, action){
             state.Alert = null;
-        },
-        // logOutFunc(state, action){
-        //     state.user = [];
-        // }
+        }
     },
     extraReducers: (builder) =>{
         //getUserApiCall 📌
         builder.addCase(getUserApiCall.pending, (state, action)=>{
+            state.important_progress = 30;
             state.isLoading = true;
         });
         builder.addCase(getUserApiCall.fulfilled, (state, action)=>{
+            state.important_progress = 50;
             state.isLoading = false;
             const {success, user_data} = action.payload;
             if(success){
@@ -45,17 +45,20 @@ const importantSlice = createSlice({
             }else{
                 // console.log(action.payload);
             }
-
+            state.important_progress = 100;
         });
         builder.addCase(getUserApiCall.rejected, (state, action)=>{
+            state.important_progress = 100;
             state.isError  = true;
         });
         
         //LoingApiCall 📌
         builder.addCase(LoingApiCall.pending, (state, action)=>{
+            state.important_progress = 30;
             state.isLoading = true;
         });
         builder.addCase(LoingApiCall.fulfilled, (state, action)=>{
+            state.important_progress = 50;
             state.isLoading = false;
             const {success, user_data } = action.payload;
             if(success){
@@ -64,17 +67,21 @@ const importantSlice = createSlice({
                 // console.log(action.payload);
             }
             
+            state.important_progress = 100;
             return state;
         });
         builder.addCase(LoingApiCall.rejected, (state, action)=>{
+            state.important_progress = 100;
             state.isError  = true;
         });
 
         // SignupApiCall 📌
         builder.addCase(SignupApiCall.pending, (state, action)=>{
+            state.important_progress = 30;
             state.isLoading = true;
         });
         builder.addCase(SignupApiCall.fulfilled, (state, action)=>{
+            state.important_progress = 50;
             state.isLoading = false;
             const {success, saved_data}= action.payload;
             if(success){
@@ -82,9 +89,12 @@ const importantSlice = createSlice({
             }else{
                 console.log(action.payload);
             }
+
+            state.important_progress = 100;
             return state;
         });
         builder.addCase(SignupApiCall.rejected, (state, action)=>{
+            state.important_progress = 100;
             state.isError  = true;
         });
         // LogOutFunc 📌
@@ -99,4 +109,4 @@ const importantSlice = createSlice({
 })
 
 export default importantSlice.reducer;
-export const {girdViewFunc, listViewFunc, setAlertFunc, removeAlertFunc, logOutFunc }  = importantSlice.actions;
+export const {girdViewFunc, listViewFunc, setAlertFunc, removeAlertFunc, logOutFunc, setLoadingProgress }  = importantSlice.actions;

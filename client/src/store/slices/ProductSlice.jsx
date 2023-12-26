@@ -2,6 +2,8 @@ import { createSlice} from '@reduxjs/toolkit'
 import { fetchProducts, fetchMoreProducts, clearFilter, fetchSingleProduct } from '../async-thunk-helper/asyncThunkHelper'
 
 
+
+
 const productSlice = createSlice({
     name: "product",
     initialState: {
@@ -11,7 +13,8 @@ const productSlice = createSlice({
         isError: false,
         totalResult:0,
         contentSize: 6,
-        page: 1
+        page: 1,
+        product_progress :0
     },
     // reducers :{
     // },
@@ -19,9 +22,11 @@ const productSlice = createSlice({
     extraReducers : (builder)=>{
         // fetchProducts 📌
         builder.addCase(fetchProducts.pending, (state, action)=>{
+            state.product_progress = 30;
             state.isLoading = true;
         });
         builder.addCase(fetchProducts.fulfilled, (state, action)=>{
+            state.product_progress = 50;
             const {success, allProductData, totalResult} = action.payload;
             state.isLoading = false;
             if(success){            
@@ -29,16 +34,20 @@ const productSlice = createSlice({
                 state.totalResult = totalResult;
                 state.page = 1;
             }
+            state.product_progress = 100;
         });
         builder.addCase(fetchProducts.rejected, (state, action)=>{
+            state.product_progress = 100;
             state.isError = true;
         });
 
         // clearFilter 📌
         builder.addCase(clearFilter.pending, (state, action)=>{
+            state.product_progress = 30;
             state.isLoading = true;
         });
         builder.addCase(clearFilter.fulfilled, (state, action)=>{
+            state.product_progress = 50;
             const {success, allProductData, totalResult} = action.payload
             state.isLoading = false;
             if(success){
@@ -46,8 +55,10 @@ const productSlice = createSlice({
                 state.totalResult = totalResult;
                 state.page = 1;
             }
+            state.product_progress = 100;
         });
         builder.addCase(clearFilter.rejected, (state, action)=>{
+            state.product_progress = 100;
             state.isError = true;
         });
 
@@ -60,7 +71,6 @@ const productSlice = createSlice({
                 state.productsData = state.productsData.concat(allProductData);
                 state.page = state.page + 1;
             }
-            
         });
         builder.addCase(fetchMoreProducts.rejected, (state, action)=>{
             state.isError = true;
@@ -68,16 +78,20 @@ const productSlice = createSlice({
         
         // fetchSingleProduct 📌
         builder.addCase(fetchSingleProduct.pending, (state, action)=>{
+            state.product_progress = 30;
             state.isLoading = true;
         });
         builder.addCase(fetchSingleProduct.fulfilled, (state, action)=>{
+            state.product_progress = 50;
             const {success, product_data} = action.payload;
             state.isLoading = false;
             if(success){
                 state.singleProductData = product_data;
             }
+            state.product_progress = 100;
         });
         builder.addCase(fetchSingleProduct.rejected, (state, action)=>{
+            state.product_progress = 100;
             state.isError = true;
         });
     }

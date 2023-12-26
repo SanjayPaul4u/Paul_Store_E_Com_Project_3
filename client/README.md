@@ -124,6 +124,9 @@
 
 ## (34) FRONTEND: Update Product Quantity By id in cart || api call done  (+ Backend) 🔥🔥🔥
 
+## (35) FRONTEND: Top Loading Bar Added
+    - npm i react-top-loading-bar
+
     
 
     
