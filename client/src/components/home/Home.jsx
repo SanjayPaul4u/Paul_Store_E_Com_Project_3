@@ -11,8 +11,7 @@ import Features from './Features';
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
-  
+  }, []);
   return (
     <Wrapper className='container'>
         <div className="main-home-div">
@@ -29,13 +28,13 @@ const Home = () => {
               <LiaBreadSliceSolid className='bread-icon'/>
             </div>
 
-            <div className='col-3 col-md-3 col-xl-3 rows'></div>
-            <div className='col-6 col-md-6 col-xl-6 rows banner-title'>
+            <div className='col-0 col-md-3 col-xl-3 rows'></div>
+            <div className='col-12 col-md-6 col-xl-6 rows banner-title'>
               <h1>Raw Material Seller<br /></h1>
               <h2>Of Bakery, Ice Creme and Cake Item</h2>
               <h4></h4>
             </div>
-            <div className='col-3 col-md-3 col-xl-3 rows'></div>
+            <div className='col-0 col-md-3 col-xl-3 rows'></div>
 
             <div className='col-4 col-md-4 col-xl-4 rows-3'></div>
             <div className='col-4 col-md-4 col-xl-4 rows-3'>
@@ -63,7 +62,7 @@ const Wrapper = styled.section`
     .banner{
       overflow: hidden;
       background-color:#2c1608;
-      height: 70vh;
+      height: 70%;
       color: #fff;
       .banner-title{
         color: #fff;
@@ -101,11 +100,88 @@ const Wrapper = styled.section`
           .cake-icon{
             font-size: 10rem;
             opacity: 0.1;
-            margin-top: 6rem;
+            margin-top: 1rem;
+            margin-bottom: -0.5rem;
           }
         }
     }
   }
   
+  @media (max-width: 1390px){}
+  @media (max-width: 1199px){
+    .banner{
+      .row{
+        .rows-1{
+          .ice-icon, .ice-creame-icon, .bread-icon{
+            font-size: 9rem;
+          }
+          .ice-creame-icon{
+            margin-top: -2rem;
+          }
+        }
+        .rows-3{
+            .cake-icon{
+              font-size: 8rem;
+            }
+          }
+        .banner-title{
+          h1{
+            font-size: 2rem;
+          }
+          h2{
+            font-size: 1.7rem
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 1199px){
+    padding: 0rem;
+    padding-top: 6rem;
+    .main-home-div{
+      padding: 0rem;
+    }
+  }
+  @media (max-width: 767px){
+    .banner{
+      .row{
+        .banner-title{
+          h1{
+            font-size: 1.7rem;
+          }
+          h2{
+            font-size: 1.5rem
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 450px){
+    .banner{
+      .row{
+        .rows-1{
+          .ice-icon, .ice-creame-icon, .bread-icon{
+            font-size: 6rem;
+          }
+          .ice-creame-icon{
+            margin-top: -2rem;
+          }
+        }
+        .rows-3{
+            .cake-icon{
+              font-size: 6rem;
+            }
+          }
+        .banner-title{
+          h1{
+            font-size: 1.5rem;
+          }
+          h2{
+            font-size: 1.2rem
+          }
+        }
+      }
+    }
+  }
 `
 export default Home

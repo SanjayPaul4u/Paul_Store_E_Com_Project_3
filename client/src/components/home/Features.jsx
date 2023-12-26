@@ -34,10 +34,10 @@ const Features = () => {
         <div className="row">
             {
               productsData.map((element, index) =>{
-                if(index<3){
+                if(index<4){
                 return(<div
                         key={element._id}
-                        className="raw-item col-4 col-md-4 col-xl-4">
+                        className="raw-item col-6 col-md-3 col-xl-3">
                           <OurProduct  ProductData={element}/>
                         </div> 
                 )}
@@ -79,7 +79,7 @@ background-color: ${({ theme }) => theme.colors.mainBg};
     }
   }
   .raw-item{
-    padding: 1rem 3rem;
+    padding: 1rem 1rem;
   }
   a {
       text-decoration: none;
@@ -128,5 +128,51 @@ background-color: ${({ theme }) => theme.colors.mainBg};
         }
       }
     }
+
+    @media (max-width: 1199px) {
+      .row .raw-item{
+        padding: 1rem 0.5rem;
+      }
+      a .card img{
+        height: 12rem;
+      }
+    }
+    @media (max-width: 991px) {
+      .row .raw-item{
+        padding: 1rem 0.5rem;
+      }
+    }
+    @media (max-width: 767px){
+      .row .raw-item{
+        padding: 1rem 1rem;
+      }
+    } 
+    @media (max-width: 450px){
+      margin-top: 0;
+      h3{
+        font-size: 1.2rem;
+      }
+      a .card .card-body{
+        padding: 0.4rem 0.4rem;
+      }
+      a .card .card-body div{
+        h5{
+          font-size: 1rem;
+        }
+        p{
+          font-size: 0.7rem;
+        }
+
+      }
+      a .card .card-body .rate-para{
+        font-size: 0.7rem;
+      }
+      a .card img{
+        height: 10rem;
+      }
+      .row .raw-item{
+        padding: 0.4rem 0.4rem;
+      }
+    } 
 `
 export default Features

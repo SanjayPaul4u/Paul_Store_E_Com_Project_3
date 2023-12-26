@@ -127,6 +127,8 @@
 ## (35) FRONTEND: Top Loading Bar Added
     - npm i react-top-loading-bar
 
+## (36) FRONTEND: Home page Responsive Done
+
     
 
     
