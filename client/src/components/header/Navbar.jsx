@@ -113,7 +113,7 @@ const Navbar = () => {
                 <NavLink className="nav-link nav-link-hover" aria-current="page" to="/signup" onClick={onclick_navbar_collapse}>SignUp</NavLink>
                 </li>  
                 </>:
-                <button className="btn btn-sm btn-danger me-3" onClick={onClickLogoutFunc}>LogOut</button>
+                <button className="btn btn-sm btn-danger" onClick={onClickLogoutFunc}>LogOut</button>
                 } 
                 {/* 📌*/}           
             </ul>

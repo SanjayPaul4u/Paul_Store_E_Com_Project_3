@@ -10,7 +10,7 @@ import { girdViewFunc, listViewFunc } from '../../store/slices/importantSlice'
 import { useSearchParams} from 'react-router-dom';
 
 
-const ProductPageHeader = () => {
+const ProductPageHeader = ({ofcampas_ref}) => { // ref - form - MainProduct.jsx
     const [searchVal, setSearchVal] = useState("");
     const [query, setQuery] = useSearchParams();
     const copy = new URLSearchParams(query);
@@ -53,6 +53,11 @@ const ProductPageHeader = () => {
         copy.set("sort", e.target.value);
         setQuery(copy);
     }
+
+    // 
+    const onClickFilterBtn =()=>{
+        ofcampas_ref.current.click();
+    }
   return (
       <Wrapper>
         <div className="product-header-content container">
@@ -60,10 +65,15 @@ const ProductPageHeader = () => {
                 {/* TOTAL PRODUCT */}
                 <div className="product-count-div">
                     <h6>{totalResult} Products Available</h6>
+                    <button className="btn btn-outline-success filter-btn"
+                    onClick={onClickFilterBtn}
+                    >
+                        filter
+                    </button>
                 </div>
 
                 {/* SEARCH */}
-                <form className="d-flex mx-4">
+                <form className="d-flex">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchVal} onChange={onChangeFunc}/>
 
                     <button className="btn btn-outline" type="submit" 
@@ -133,8 +143,17 @@ const Wrapper = styled.section`
             align-items: center;
 
             .product-count-div{
+                h6{
+                    margin-right: 0.5rem;
+                    
+                }
+                .filter-btn{
+                    display: none;
+                }
+
             }
             form{
+                margin-right: 0.5rem;
                 .btn-outline{
                     color: ${({theme})=> theme.colors.green};
                     border-color: ${({theme})=> theme.colors.green};
@@ -160,6 +179,31 @@ const Wrapper = styled.section`
                 text-align: center;
                 margin-bottom: 0rem;
                 cursor: pointer;
+            }
+        }
+    }
+    @media (max-width: 767px) {
+        .product-header-content{
+            flex-direction: column;
+            /* justify-content: flex-start; */
+            align-items: flex-start;
+            .first-row{
+                flex-direction: column;
+                align-items: flex-start;
+                .product-count-div{
+                    margin-bottom: 0.5rem;
+                    h6{
+                        margin-right: 1rem;
+                        display: inline-block;
+                    }
+                    .filter-btn{
+                        display: inline-block;
+                    }
+                }
+                form{
+                   margin : 0;
+                   margin-bottom: 0.8rem;
+                }
             }
         }
     }

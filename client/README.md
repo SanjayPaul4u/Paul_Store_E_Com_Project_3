@@ -137,6 +137,8 @@
 
 ## (40) FRONTEND: Cart Page Responsive Done
 
+## (41) FRONTEND: Product Page Responsive Done WITH OFCANVAS
+
     
 
     

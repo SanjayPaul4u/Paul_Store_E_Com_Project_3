@@ -56,14 +56,14 @@ const fetchMoreFunc = () => {
                 {/* badge end*/}
 
                 <div className="row g-0">
-                  <div className="col-md-3">
+                  <div className="col-12 col-md-3 col-xl-3 img-row-1">
                     <img
                       src={`data:${image[0].fileType};base64,${image[0].imagebase64}`}
                       className="img-fluid rounded-start"
                       alt="list-product-img-err"
                     />
                   </div>
-                  <div className="col-md-9">
+                  <div className="col-12 col-md-9 col-xl-9">
                     <div className="card-body">
                       <div>
                         <h5>{name}</h5>
@@ -153,6 +153,7 @@ const Wrapper = styled.div`
           }
         }
         .rate-para {
+          padding-top: 0.5rem;
           display: flex;
           justify-content: center;
           color: ${({ theme }) => theme.colors.mediumBlack};
@@ -162,6 +163,30 @@ const Wrapper = styled.div`
           }
         }
       }
+    }
+  }
+  @media (max-width: 767px) {
+    .row-products .card .row .img-row-1{
+      padding: 1rem;
+      padding-top: 1.5rem;
+      width: 50%;
+    }
+  }
+  @media (max-width: 370px) {
+    .row-products .card .row .img-row-1{
+      width: 100%;
+    }
+    .row-products .card .card-body div{
+      h5{
+        font-size: 1rem;
+      }
+      p{
+        font-size: 0.7rem;
+        
+      }
+    }
+    .row-products .card .card-body .rate-para {
+      font-size: 0.8rem;
     }
   }
 `;

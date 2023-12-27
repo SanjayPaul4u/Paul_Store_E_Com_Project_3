@@ -41,7 +41,7 @@ const GridView = ({main_products_data}) => {
               return (
                 <div
                   key={element._id}
-                  className="row-products col-6 col-md-4 col-xl-4"
+                  className="row-products col-6 col-md-6 col-xl-4"
                 >
                   <OurProduct ProductData={element} />
                 </div>
@@ -110,6 +110,29 @@ const Wrapper = styled.div`
           }
         }
       }
+    }
+  }
+  @media (max-width: 991px) {
+    padding: 0rem;
+  }
+  @media (max-width: 450px) {
+    .row-products .card .card-body{
+      flex-direction: column;
+      padding: 0.2rem;
+      p{
+        font-size: 0.8rem;
+      }
+      h5{
+        font-size: 1rem;
+      }
+      .rate-para{
+        text-align: end;
+        
+      }
+    }
+    .row-products{
+      padding-right: 0.4rem;
+      padding-left: 0.8rem;
     }
   }
 `;

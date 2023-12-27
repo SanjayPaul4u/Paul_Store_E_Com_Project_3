@@ -9,7 +9,7 @@ import { FaCheck } from "react-icons/fa6";
 
 
 
-const FilterRow = () => {
+const FilterRow = ({close_ofcampas_ref}) => { // ref-from- Filterofcampas.jsx
   
   // GOT PRODUCT DATA by useSelector 📌
   const main_products_data = useSelector((state) => {
@@ -29,30 +29,36 @@ const FilterRow = () => {
   const onClickCategory = (e) =>{
     copy.set("category", e.target.value);
     setQuery(copy);
+    close_ofcampas_ref.current.click();
   }
   const onClickPrice = (e)=>{
     copy.set("price", e.target.value);
     setQuery(copy);
+    close_ofcampas_ref.current.click();
   }
   const onChangeCompany = (e)=>{
     copy.set("company", e.target.value);
     setQuery(copy);
+    close_ofcampas_ref.current.click();
   }
   const onChangeWeight = (e)=>{
     copy.set("weight", e.target.value);
     setQuery(copy);
+    close_ofcampas_ref.current.click();
   }
   const onClickColor = (value)=>{
     copy.set("color", value);
     setQuery(copy);
+    close_ofcampas_ref.current.click();
   }
   // 📌
   const clearFilterFunc = ()=>{
     setQuery({});
     dispatch(clearFilter({contentSize, page}));
+    close_ofcampas_ref.current.click();
   }
   return (
-    <Wrapper className="filter-row-1 col-10 col-md-3 col-xl-3">
+    <Wrapper className="filter-row-1 col-12 col-md-3 col-xl-3">
       {/* CATEGORY FILTER */}
       <div className="category-filter">
         <h6>CATEGORY:</h6>
@@ -251,5 +257,10 @@ const Wrapper = styled.div`
   #disable{
     opacity: 0.7;
   }
+
+  @media (max-width: 991px) {
+    font-size: 80%;
+  }
+  
 `;
 export default FilterRow;

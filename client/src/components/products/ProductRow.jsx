@@ -66,7 +66,7 @@ const ProductRow = () => {
   // console.log(main_products_data);
 
   return (
-    <Wrapper className="product-row-2 col-10 col-md-9 col-xl-9">
+    <Wrapper className="product-row-2 col-12 col-md-9 col-xl-9">
       {
         main_important_data.gridView? 
         <GridView main_products_data = {main_products_data} />:
