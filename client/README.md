@@ -129,6 +129,8 @@
 
 ## (36) FRONTEND: Home page Responsive Done
 
+## (37) FRONTEND: Navbar Responsive Done
+
     
 
     
