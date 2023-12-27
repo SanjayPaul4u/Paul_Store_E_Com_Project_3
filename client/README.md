@@ -131,6 +131,8 @@
 
 ## (37) FRONTEND: Navbar Responsive Done
 
+## (38) FRONTEND: Contact Page Responsive Done
+
     
 
     

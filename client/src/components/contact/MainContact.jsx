@@ -57,9 +57,11 @@ const Wrapper = styled.section`
     padding-top: 4rem;
     font-family: ${({theme})=> theme.fonts.font2};
     .main-contact{
+        height: 100%;
         padding: 1.2rem;
         
         .row{
+            height: 100%;
             .first-row{
                 h4{
                     margin-top: 2rem;
@@ -88,17 +90,43 @@ const Wrapper = styled.section`
                 }
            } 
             .second-row{
+                height: 30rem;
                 h4{
                     margin-top: 2rem;
                 }
                 .our-map{
-                    height: 100%;
+                    height: 80%;
                     background-color: ${({theme})=>theme.colors.mainBg};
                     iframe{
                         height: 100%; 
                         width: 100%;
                     }
                 }
+            }
+        }
+    }
+    @media (max-width: 450px) {
+        .main-contact{
+            padding: 0.5rem;
+        }
+        .main-contact .row .first-row{
+            h4{
+                font-size: 1.2rem;
+            }
+            p{
+                font-size: 0.8rem;
+            }
+            .iconStyle{
+                font-size: 1.5rem;
+                margin-top: 0rem;
+            }
+            .address-div, .online-div{
+                padding: 0.8rem;
+            }
+        } 
+        .main-contact .row .second-row{
+            h4{
+                font-size: 1.2rem;
             }
         }
     }
