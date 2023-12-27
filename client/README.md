@@ -133,6 +133,8 @@
 
 ## (38) FRONTEND: Contact Page Responsive Done
 
+## (39) FRONTEND: Single Product Page Responsive Done
+
     
 
     

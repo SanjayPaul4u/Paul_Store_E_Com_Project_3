@@ -12,7 +12,7 @@ const SingleImage = ({singleProductData}) => {
     }
   return (
     <>
-    {image && <Wrapper className='col-6 col-md-6 col-xl-6'>
+    {image && <Wrapper className='col-12 col-md-8 col-xl-6'>
         <div className="card position-relative">
              {/* badge */}
              <div className='badge-div position-absolute'>
@@ -69,5 +69,7 @@ const Wrapper = styled.div`
         }
                 
     }
+
+    
 `
 export default SingleImage

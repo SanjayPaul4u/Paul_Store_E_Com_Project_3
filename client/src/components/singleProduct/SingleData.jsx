@@ -37,20 +37,20 @@ const SingleData = ({singleProductData}) => {
 
         <hr />
         
-        <div className="about-service">
-          <div className="our-services">
+        <div className="about-service row">
+          <div className="our-services col-6 col-md-3 col-xl-3">
             <TbTruckDelivery className='iconStyle'/>
             <p>Free & Quick Delivery</p>
           </div>
-          <div className="our-services">
+          <div className="our-services col-6 col-md-3 col-xl-3">
             <TbReplace className='iconStyle'/>
             <p>7 Days Replacement</p>
           </div>
-          <div className="our-services">
+          <div className="our-services col-6 col-md-3 col-xl-3">
             <MdSecurity className='iconStyle' />
             <p>Warranty Available</p>
           </div>
-          <div className="our-services">
+          <div className="our-services col-6 col-md-3 col-xl-3">
             <FaAmazonPay className='iconStyle' />
             <p>Secure Payment</p>
           </div>
@@ -128,9 +128,32 @@ text-transform: capitalize;
       }
       p{
         font-size: 0.8rem;
+        text-align: center;
         color: ${({theme})=>theme.colors.mediumBlack};
       }
     }
   }
-`
+
+  @media (max-width: 767px) {
+    margin-top: 2rem;
+  }
+  @media (max-width: 450px) {
+    .about-service .our-services{
+      .iconStyle{
+        font-size: 1.8rem;
+      }
+      p{
+        font-size: 0.8rem;
+      }
+    } 
+  }
+  @media (max-width: 380px) {
+    
+    .about-service .our-services{
+      p{
+        font-size: 0.7rem;
+      }
+    } 
+  }
+  `
 export default SingleData

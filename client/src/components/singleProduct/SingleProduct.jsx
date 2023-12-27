@@ -38,10 +38,10 @@ const SingleProduct = () => {
       <div className='single-main-product'>
         <div className='container'>       
         <div className="row single-product-body">
-          <div className="img-row col-6 col-md-6 col-xl-6">
+          <div className="img-row col-12 col-md-6 col-xl-6">
             <SingleImage singleProductData={singleProductData}/>
           </div>
-          <div className="data-row col-6 col-md-6 col-xl-6">
+          <div className="data-row col-12 col-md-6 col-xl-6">
             <SingleData singleProductData={singleProductData}/>
           </div>
         </div>
@@ -53,7 +53,8 @@ const SingleProduct = () => {
 }
 
 const Wrapper = styled.section`
-    height: 100vh;
+    min-height: 100vh;
+    max-height: auto;
     padding-top: 4rem;
     .header{
       color: ${({theme})=> theme.colors.lowBlack};
@@ -82,5 +83,16 @@ const Wrapper = styled.section`
         }
       }
     }
+
+    @media (max-width: 380px) {
+      .single-main-product{
+        padding: 0;
+      }
+      .header .header-div{
+        h6{
+          font-size: 0.8rem;
+        }
+      }
+  }
 `
 export default SingleProduct
