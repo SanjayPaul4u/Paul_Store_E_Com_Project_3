@@ -42,7 +42,7 @@ const UserCartData = ({data, deleteCartProductFunc}) => {
     <Wrapper className="user-cart-item row">
         <button className="btn btn-sm btn-danger d-none" ref={saveRef} onClick={onClickSaveFunc}>save</button>
 
-        <div className='product-data col-md-5 col-xl-5'>
+        <div className='product-data col-12 col-md-5 col-xl-5'>
             <div className='product-img'>
                 <img src={`data:${image.fileType};base64,${image.imagebase64}`} alt="img-error" className='card-img-top'/>
             </div>
@@ -54,11 +54,11 @@ const UserCartData = ({data, deleteCartProductFunc}) => {
             </div>
         </div>
 
-        <div className="product-price col-md-2 col-xl-2">
+        <div className="product-price col-12 col-md-2 col-xl-2">
             <p><PriceFormat price={price*100}/></p>
         </div>
 
-        <div className="product-quantity col-md-2 col-xl-2">
+        <div className="product-quantity col-12 col-md-2 col-xl-2">
              {/* quantity, Increment, Decrement */}
             {/* <p>{quantity}</p> */}
             <CartAmountToggle 
@@ -68,11 +68,11 @@ const UserCartData = ({data, deleteCartProductFunc}) => {
             />
         </div>
 
-        <div className="product-total-price col-md-2 col-xl-2">
+        <div className="product-total-price col-8 col-md-2 col-xl-2">
             <p><PriceFormat price={(price*quantity)*100}/></p>
         </div>
 
-        <div className="delete-item col-md-1 col-xl-1">
+        <div className="delete-item col-4 col-md-1 col-xl-1">
             <RiDeleteBack2Fill className='iconStyle' onClick={()=>{deleteCartProductFunc(_id)}}/>
         </div>
   </Wrapper>
@@ -116,29 +116,48 @@ font-size: 0.9rem;
     }
 
     .product-price{
-        display: flex;
-        align-items: center;
         color:  ${({theme})=>theme.colors.lowBlack};
     } 
     .product-quantity{
-        display: flex;
-        align-items: center;
         color:  ${({theme})=>theme.colors.lowBlack};
     }
     .product-total-price{
-        display: flex;
-        align-items: center;
         color:  ${({theme})=>theme.colors.black};
     }
     .delete-item{
         display: flex;
         justify-content: flex-end;
-        align-items: center;
         padding: 0;
         .iconStyle{
             font-size: 1.5rem;
             color:  ${({theme})=>theme.colors.red};
             cursor: pointer;
+        }
+    }
+    @media (max-width: 991px) {
+        .product-data{
+            .product-details{
+                h5{
+                    font-size: 1rem;
+                }
+                p{
+                    font-size: 0.7rem;
+                }
+            }
+        }
+        .product-price, .product-quantity, .product-total-price{
+            font-size: 0.8rem;
+        }
+        .delete-item .iconStyle{
+            font-size: 1.2rem;
+        }
+    }
+    @media (max-width: 767px){
+        .product-price{
+            margin-bottom: -1rem;
+        }
+        .delete-item {
+            margin-top: -0.5rem;
         }
     }
 `

@@ -135,6 +135,8 @@
 
 ## (39) FRONTEND: Single Product Page Responsive Done
 
+## (40) FRONTEND: Cart Page Responsive Done
+
     
 
     

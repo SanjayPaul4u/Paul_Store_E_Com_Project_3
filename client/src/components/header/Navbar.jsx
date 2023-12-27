@@ -113,7 +113,7 @@ const Navbar = () => {
                 <NavLink className="nav-link nav-link-hover" aria-current="page" to="/signup" onClick={onclick_navbar_collapse}>SignUp</NavLink>
                 </li>  
                 </>:
-                <button className="btn btn-sm btn-danger" onClick={onClickLogoutFunc}>LogOut</button>
+                <button className="btn btn-sm btn-danger me-3" onClick={onClickLogoutFunc}>LogOut</button>
                 } 
                 {/* 📌*/}           
             </ul>
@@ -125,6 +125,9 @@ const Navbar = () => {
 
 const Wrapper = styled.nav`
     background-color: ${({theme})=> theme.colors.black};
+    .navbar-toggler{
+        background-color: white;
+    }
 
     .container-fluid .navbar-brand{
         color: #fff;
@@ -168,6 +171,7 @@ const Wrapper = styled.nav`
         text-transform: lowercase;
         font-family: ${({theme})=>theme.fonts.font2};
     }
+    
 
     @media (max-width:991px) {
         .navbar-nav .nav-item .nav-link{

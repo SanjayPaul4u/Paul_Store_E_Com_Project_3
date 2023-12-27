@@ -68,18 +68,18 @@ const MainCart = () => {
       {cartData.length !==0 && <div className="container main-cart">
         <div className="row sub-main-cart">
           <h4 className='cart-heading-text'>Your Shopping Cart</h4>
-          <div className='item-rows col-10 col-md-9 col-xl-9'>
+          <div className='item-rows col-12 col-md-12 col-xl-9'>
             <div className="row">
               <p className='col-md-5 col-xl-5'>Item</p>
               <p className='col-md-2 col-xl-2' >Price</p>
               <p className='col-md-2 col-xl-2'>Quantity</p>
               <p className='col-md-2 col-xl-2'>Total</p>
-              <p className='col-md-1 col-xl-1'>Delete</p>
+              <p className='col-md-1 col-xl-1' id='delete-row'>Delete</p>
             </div>
           </div>
 
           {/* CART DATA DIV */}
-          <div className="cart-data-div col-10 col-md-9 col-xl-9">
+          <div className="cart-data-div col-12 col-md-12 col-xl-9">
             {cartData.length > 0 && cartData.map((element)=>{
               return <UserCartData key={element._id} data = {element} deleteCartProductFunc={deleteCartProductFunc}/>
             })}
@@ -93,7 +93,7 @@ const MainCart = () => {
           </div>
 
           {/* ORDER DIV */}
-          <div className="order-div col-10 col-md-3 col-xl-3">
+          <div className="order-div col-12 col-md-12 col-xl-3">
             <div className="order-data">
 
               <div>
@@ -126,7 +126,8 @@ const MainCart = () => {
   )
 }
 const Wrapper = styled.div`
-height: 100vh;
+min-height: 100vh;
+max-height: auto;
 padding-top: 4rem;
 background-color: ${({theme})=> theme.colors.mainBg};
 
@@ -192,5 +193,27 @@ background-color: ${({theme})=> theme.colors.mainBg};
       }
     }
   }
+
+  @media (max-width: 1199px) {
+    .main-cart .sub-main-cart .order-div{
+      padding: 0;
+      padding-top: 1rem;
+    }
+    
+  }
+  @media (max-width: 991px) {
+    #delete-row{
+      margin-left: -1rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .empty-text{
+      font-size: 1.2rem;
+    }
+    .sub-main-cart .item-rows{
+      display: none;
+    }
+  }
+  
 `
 export default MainCart
