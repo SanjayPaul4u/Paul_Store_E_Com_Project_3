@@ -16,7 +16,7 @@ const Services = () => {
                 <div>
                     <FaDelicious className='iconStyle'/> 
                     <h5>A-Z Raw Materials</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ipsum sit nulla molestias fuga commodi consequatur maxime.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ipsum sit nulla molestias</p>
                 </div>
             </div>
             <div className="cash-on-delivery col-6 col-md-4 col-xl-4">
@@ -79,7 +79,7 @@ const Wrapper = styled.section`
         .a-x-raw-materials, .cash-on-delivery, .money-back-guaranteed{
             padding: 0.2rem;
             div{
-                height: 18rem;
+                height: 15rem;
             }
         } 
     } 

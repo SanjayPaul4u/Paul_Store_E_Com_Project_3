@@ -34,8 +34,8 @@ const MainAlert = () => {
 }
 const Wrapper = styled.section`
 #main-alert{
-    padding: 0rem 1rem;
-    margin-top: 9rem;
+    padding: 0rem 1.5rem;
+    margin-top: 5rem;
     
     
 }

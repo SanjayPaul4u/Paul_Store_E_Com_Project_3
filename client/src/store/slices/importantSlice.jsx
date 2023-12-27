@@ -9,7 +9,7 @@ import { LogOutFunc } from '../actions';
 const importantSlice = createSlice({
     name: "user",
     initialState: {
-        gridView : false,
+        gridView : true,
         isLoading : false,
         isError: false,
         user: [],

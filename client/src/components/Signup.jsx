@@ -47,6 +47,7 @@ const Signup = () => {
 
   // use Effect
   useEffect(() => {
+    window.scrollTo(0, 0);
     if(GetCookie("paul-store-token")){
       navigate(-1);
     }
