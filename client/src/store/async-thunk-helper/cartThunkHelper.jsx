@@ -3,7 +3,7 @@ import axios from 'axios';
 import GetCookie from '../../hooks/getCookie';
 
 
-const host = "http://localhost:7000";
+const host = import.meta.env.VITE_APP_SERVER;
 // addToCartApiCall
 export const addToCartApiCall = createAsyncThunk("addToCartApiCall", async({cartData})=>{
     try {

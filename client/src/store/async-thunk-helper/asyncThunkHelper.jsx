@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-const host = "http://localhost:7000";
+const host = import.meta.env.VITE_APP_SERVER;
 let filter = '';
 
 // fetchProducts📌 CREATE USEING CREATE ASYNC THUNK
